@@ -1,0 +1,12 @@
+.page {
+  padding-top: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.placeholder {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-md);
+}

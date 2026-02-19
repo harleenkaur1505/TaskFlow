@@ -4,6 +4,7 @@ import ProtectedRoute from './components/layout/ProtectedRoute';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Boards from './pages/Boards/Boards';
+import Board from './pages/Board/Board';
 
 function App() {
   return (
@@ -17,6 +18,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Boards />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/board/:boardId"
+            element={
+              <ProtectedRoute>
+                <Board />
               </ProtectedRoute>
             }
           />
