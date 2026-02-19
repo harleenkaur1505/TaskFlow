@@ -32,6 +32,10 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
+// Routes
+const authRoutes = require('./routes/auth');
+app.use('/api/auth', authRoutes);
+
 // Global error handler (must be after routes)
 const errorHandler = require('./middleware/errorHandler');
 app.use(errorHandler);
