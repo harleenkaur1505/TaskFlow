@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
-const mongoSanitize = require('express-mongo-sanitize');
+const mongoSanitize = require('./middleware/mongoSanitize');
 const hpp = require('hpp');
 const path = require('path');
 
@@ -86,7 +86,7 @@ app.use(cookieParser());
 // ---------------------------------------------------------------------------
 // Data sanitization — prevent NoSQL injection & XSS
 // ---------------------------------------------------------------------------
-app.use(mongoSanitize());
+app.use(mongoSanitize);
 app.use(sanitize);
 
 // ---------------------------------------------------------------------------
