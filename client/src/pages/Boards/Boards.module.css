@@ -1,0 +1,23 @@
+.page {
+  padding: var(--space-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-xl);
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+  color: var(--color-text-primary);
+}
+
+.placeholder {
+  color: var(--color-text-secondary);
+  text-align: center;
+  padding: var(--space-2xl);
+}
