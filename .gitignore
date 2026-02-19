@@ -25,17 +25,3 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
-
-# AI build docs — do not push
-CLAUDE.md
-00-CLAUDE-CODE-BUILD-GUIDE.md
-docs/01-PRODUCT-PHILOSOPHY.md
-docs/02-PRD.md
-docs/03-TECH-STACK.md
-docs/04-CONVENTIONS.md
-docs/05-BUILD-ORDER.md
-docs/06-DATABASE-SCHEMA.md
-docs/07-API-REFERENCE.md
-.claude/
-.cursorules
-.aider*
