@@ -6,21 +6,22 @@
   min-width: 280px;
   height: 44px;
   padding: 0 14px;
-  background: rgba(255, 255, 255, 0.16);
-  border: 1px dashed rgba(255, 255, 255, 0.25);
+  background: var(--color-bg-tertiary);
+  border: 1px dashed var(--color-border);
   border-radius: 14px;
   font-size: 14px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--color-text-secondary);
   cursor: pointer;
-  transition: background 150ms ease, border-color 150ms ease;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
   flex-shrink: 0;
   font-family: var(--font-family);
 }
 
 .trigger:hover {
-  background: rgba(255, 255, 255, 0.24);
-  border-color: rgba(255, 255, 255, 0.35);
+  background: var(--color-bg-hover);
+  border-color: var(--color-text-tertiary);
+  color: var(--color-text-primary);
 }
 
 .form {

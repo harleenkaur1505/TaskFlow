@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { getBoardGradient } from '../../utils/boardGradient';
 import styles from './BoardCard.module.css';
 
 function BoardCard({ board, isStarred, onToggleStar }) {
@@ -25,7 +26,7 @@ function BoardCard({ board, isStarred, onToggleStar }) {
   return (
     <div
       className={styles.card}
-      style={{ backgroundColor: board.background || '#6C63FF' }}
+      style={{ background: getBoardGradient(board.background || '#6C63FF') }}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       role="button"

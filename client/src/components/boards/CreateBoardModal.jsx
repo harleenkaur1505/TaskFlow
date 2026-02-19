@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { getBoardGradient } from '../../utils/boardGradient';
 import styles from './CreateBoardModal.module.css';
 
 const COLORS = [
@@ -57,7 +58,7 @@ function CreateBoardModal({ isOpen, onClose, onCreate }) {
   return (
     <div className={styles.backdrop} onClick={handleBackdropClick}>
       <div className={styles.modal} ref={modalRef} role="dialog" aria-modal="true">
-        <div className={styles.preview} style={{ backgroundColor: background }}>
+        <div className={styles.preview} style={{ background: getBoardGradient(background) }}>
           <div className={styles.previewLists}>
             <div className={styles.previewList} />
             <div className={styles.previewList} />
@@ -103,7 +104,7 @@ function CreateBoardModal({ isOpen, onClose, onCreate }) {
                   className={`${styles.colorSwatch} ${
                     background === color ? styles.colorSelected : ''
                   }`}
-                  style={{ backgroundColor: color }}
+                  style={{ background: getBoardGradient(color) }}
                   onClick={() => setBackground(color)}
                   aria-label={`Select color ${color}`}
                 >

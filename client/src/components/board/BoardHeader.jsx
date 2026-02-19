@@ -45,6 +45,10 @@ function BoardHeader({ onToggleActivity, activityOpen }) {
   return (
     <div className={styles.header}>
       <div className={styles.left}>
+        <span
+          className={styles.colorDot}
+          style={{ background: board.background || '#6C63FF' }}
+        />
         {isEditing ? (
           <input
             ref={inputRef}

@@ -94,7 +94,7 @@ function BoardContent() {
 
   if (isLoading) {
     return (
-      <div className={styles.page} style={{ backgroundColor: '#0079BF' }}>
+      <div className={styles.page}>
         <Navbar />
         <BoardSkeleton />
       </div>
@@ -103,10 +103,8 @@ function BoardContent() {
 
   if (!board) return null;
 
-  const bgStyle = { backgroundColor: board.background || '#0079BF' };
-
   return (
-    <div className={styles.page} style={bgStyle}>
+    <div className={styles.page}>
       <Navbar />
       <BoardHeader
         onToggleActivity={() => setShowActivity((prev) => !prev)}
