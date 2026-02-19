@@ -1,12 +1,32 @@
 .page {
-  padding-top: 80px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.loadingWrapper {
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  background: var(--color-bg-secondary);
 }
 
-.placeholder {
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-md);
+.listsContainer {
+  display: flex;
+  align-items: flex-start;
+  padding: 12px;
+  gap: 12px;
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* Smooth horizontal scrolling */
+  scroll-behavior: smooth;
+  /* Top offset: navbar 48px + board header 52px */
+  padding-top: 12px;
+}
+
+.listWrapper {
+  flex-shrink: 0;
+  width: 272px;
 }

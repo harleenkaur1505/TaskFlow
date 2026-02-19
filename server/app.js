@@ -35,8 +35,10 @@ app.get('/api/health', (req, res) => {
 // Routes
 const authRoutes = require('./routes/auth');
 const boardRoutes = require('./routes/boards');
+const listRoutes = require('./routes/lists');
 app.use('/api/auth', authRoutes);
 app.use('/api/boards', boardRoutes);
+app.use('/api/boards/:boardId/lists', listRoutes);
 
 // Global error handler (must be after routes)
 const errorHandler = require('./middleware/errorHandler');
