@@ -233,7 +233,7 @@ TaskFlow/
 - **CORS** — Locked to configured client origin
 - **Rate Limiting** — 100 req/15min globally, 5 req/min on auth endpoints
 - **Input Sanitization** — HTML entity escaping on all text inputs
-- **NoSQL Injection Prevention** — Query parameter sanitization via express-mongo-sanitize
+- **NoSQL Injection Prevention** — Custom query parameter sanitization middleware
 - **HTTP Parameter Pollution** — Protected via hpp
 - **JWT Auth** — Short-lived access tokens (15min) with httpOnly refresh cookies (7 days)
 - **File Upload Validation** — MIME type whitelist and 10MB size limit
