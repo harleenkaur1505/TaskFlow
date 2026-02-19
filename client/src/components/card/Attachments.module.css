@@ -1,0 +1,142 @@
+.section {
+  margin-bottom: var(--space-lg);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.icon {
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: var(--space-sm);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 8px;
+  border-radius: var(--border-radius-sm);
+  transition: background var(--transition-fast);
+}
+
+.item:hover {
+  background: rgba(9, 30, 66, 0.06);
+}
+
+.fileIcon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(9, 30, 66, 0.06);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.fileInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.fileName {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fileName:hover {
+  text-decoration: underline;
+  color: var(--color-primary);
+}
+
+.fileDate {
+  display: block;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.deleteBtn {
+  opacity: 0;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: none;
+  border-radius: 2px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: opacity var(--transition-fast), color var(--transition-fast);
+}
+
+.item:hover .deleteBtn {
+  opacity: 1;
+}
+
+.deleteBtn:hover {
+  color: var(--color-danger);
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.addBtn {
+  display: inline-block;
+  background: rgba(9, 30, 66, 0.06);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.addBtn:hover {
+  background: rgba(9, 30, 66, 0.14);
+}
+
+[data-theme="dark"] .item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .fileIcon {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .addBtn {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .addBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}

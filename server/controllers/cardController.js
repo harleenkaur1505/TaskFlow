@@ -656,6 +656,21 @@ const deleteAttachment = async (req, res, next) => {
   }
 };
 
+const getCardActivity = async (req, res, next) => {
+  try {
+    const { cardId } = req.params;
+
+    const activities = await Activity.find({ card: cardId })
+      .sort({ createdAt: -1 })
+      .populate('user', 'name email avatar')
+      .limit(50);
+
+    res.json({ data: activities });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   createCard,
   getCard,
@@ -671,4 +686,5 @@ module.exports = {
   addComment,
   addAttachment,
   deleteAttachment,
+  getCardActivity,
 };

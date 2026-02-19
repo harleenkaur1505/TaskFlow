@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { format, isPast, isToday } from 'date-fns';
 import styles from './Card.module.css';
 
-function Card({ card }) {
+function Card({ card, onClick }) {
   const hasLabels = card.labels && card.labels.length > 0;
   const hasMembers = card.members && card.members.length > 0;
   const hasDueDate = !!card.dueDate;
@@ -27,7 +27,8 @@ function Card({ card }) {
   }
 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={onClick} role="button" tabIndex={0}
+      onKeyDown={(e) => e.key === 'Enter' && onClick?.()}>
       {card.coverColor && (
         <div
           className={styles.cover}

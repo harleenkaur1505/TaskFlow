@@ -82,3 +82,8 @@ export const deleteAttachment = async (boardId, cardId, attachmentId) => {
   );
   return data.data;
 };
+
+export const getCardActivity = async (boardId, cardId) => {
+  const { data } = await api.get(`/boards/${boardId}/cards/${cardId}/activity`);
+  return data.data;
+};

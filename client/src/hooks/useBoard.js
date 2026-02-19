@@ -9,9 +9,19 @@ import {
 } from '../api/listsApi';
 import {
   createCard as createCardApi,
+  getCard as getCardApi,
+  updateCard as updateCardApi,
   deleteCard as deleteCardApi,
   reorderCards as reorderCardsApi,
   moveCard as moveCardApi,
+  addCardMember as addCardMemberApi,
+  removeCardMember as removeCardMemberApi,
+  addChecklist as addChecklistApi,
+  updateChecklistItem as updateChecklistItemApi,
+  deleteChecklist as deleteChecklistApi,
+  addComment as addCommentApi,
+  addAttachment as addAttachmentApi,
+  deleteAttachment as deleteAttachmentApi,
 } from '../api/cardsApi';
 
 function useBoard() {
@@ -41,7 +51,6 @@ function useBoard() {
 
   const addList = useCallback(async (boardId, title) => {
     const newList = await createListApi(boardId, title);
-    // Add empty cards array for frontend rendering
     dispatch({ type: 'ADD_LIST', payload: { ...newList, cards: [] } });
     return newList;
   }, [dispatch]);
@@ -57,10 +66,7 @@ function useBoard() {
   }, [dispatch]);
 
   const reorderListsAction = useCallback(async (boardId, reorderedLists) => {
-    // Optimistic: update local state immediately
     dispatch({ type: 'REORDER_LISTS', payload: reorderedLists });
-
-    // Send new positions to server
     const listPositions = reorderedLists.map((list, index) => ({
       listId: list._id,
       position: index,
@@ -74,15 +80,26 @@ function useBoard() {
     return newCard;
   }, [dispatch]);
 
+  const updateCard = useCallback(async (boardId, cardId, updates) => {
+    dispatch({ type: 'UPDATE_CARD', payload: { _id: cardId, ...updates } });
+    const updated = await updateCardApi(boardId, cardId, updates);
+    dispatch({ type: 'UPDATE_CARD', payload: updated });
+    return updated;
+  }, [dispatch]);
+
+  const fetchCard = useCallback(async (boardId, cardId) => {
+    const card = await getCardApi(boardId, cardId);
+    dispatch({ type: 'UPDATE_CARD', payload: card });
+    return card;
+  }, [dispatch]);
+
   const removeCard = useCallback(async (boardId, listId, cardId) => {
     dispatch({ type: 'DELETE_CARD', payload: { listId, cardId } });
     await deleteCardApi(boardId, cardId);
   }, [dispatch]);
 
   const reorderCardsAction = useCallback(async (boardId, listId, reorderedCards) => {
-    // Optimistic: update local state immediately
     dispatch({ type: 'REORDER_CARDS', payload: { listId, cards: reorderedCards } });
-
     const cardPositions = reorderedCards.map((card, index) => ({
       cardId: card._id,
       position: index,
@@ -93,12 +110,10 @@ function useBoard() {
   const moveCardAction = useCallback(async (
     boardId, sourceListId, destListId, sourceCards, destCards, cardId, newPosition,
   ) => {
-    // Optimistic: update local state immediately
     dispatch({
       type: 'MOVE_CARD',
       payload: { sourceListId, destListId, sourceCards, destCards },
     });
-
     await moveCardApi(boardId, {
       cardId,
       sourceListId,
@@ -107,10 +122,62 @@ function useBoard() {
     });
   }, [dispatch]);
 
+  const addMemberToCard = useCallback(async (boardId, cardId, userId) => {
+    const updated = await addCardMemberApi(boardId, cardId, userId);
+    dispatch({ type: 'UPDATE_CARD', payload: updated });
+    return updated;
+  }, [dispatch]);
+
+  const removeMemberFromCard = useCallback(async (boardId, cardId, userId) => {
+    const updated = await removeCardMemberApi(boardId, cardId, userId);
+    dispatch({ type: 'UPDATE_CARD', payload: updated });
+    return updated;
+  }, [dispatch]);
+
+  const addChecklistToCard = useCallback(async (boardId, cardId, title) => {
+    const updated = await addChecklistApi(boardId, cardId, title);
+    dispatch({ type: 'UPDATE_CARD', payload: updated });
+    return updated;
+  }, [dispatch]);
+
+  const updateChecklistItemOnCard = useCallback(async (
+    boardId, cardId, checklistId, itemData,
+  ) => {
+    const updated = await updateChecklistItemApi(boardId, cardId, checklistId, itemData);
+    dispatch({ type: 'UPDATE_CARD', payload: updated });
+    return updated;
+  }, [dispatch]);
+
+  const deleteChecklistFromCard = useCallback(async (boardId, cardId, checklistId) => {
+    const updated = await deleteChecklistApi(boardId, cardId, checklistId);
+    dispatch({ type: 'UPDATE_CARD', payload: updated });
+    return updated;
+  }, [dispatch]);
+
+  const addCommentToCard = useCallback(async (boardId, cardId, text) => {
+    const activity = await addCommentApi(boardId, cardId, text);
+    return activity;
+  }, []);
+
+  const addAttachmentToCard = useCallback(async (boardId, cardId, file) => {
+    const updated = await addAttachmentApi(boardId, cardId, file);
+    dispatch({ type: 'UPDATE_CARD', payload: updated });
+    return updated;
+  }, [dispatch]);
+
+  const deleteAttachmentFromCard = useCallback(async (
+    boardId, cardId, attachmentId,
+  ) => {
+    const updated = await deleteAttachmentApi(boardId, cardId, attachmentId);
+    dispatch({ type: 'UPDATE_CARD', payload: updated });
+    return updated;
+  }, [dispatch]);
+
   return {
     board,
     lists,
     isLoading,
+    dispatch,
     fetchBoard,
     updateBoardTitle,
     addList,
@@ -118,9 +185,19 @@ function useBoard() {
     removeList,
     reorderLists: reorderListsAction,
     addCard,
+    updateCard,
+    fetchCard,
     removeCard,
     reorderCards: reorderCardsAction,
     moveCard: moveCardAction,
+    addMemberToCard,
+    removeMemberFromCard,
+    addChecklistToCard,
+    updateChecklistItemOnCard,
+    deleteChecklistFromCard,
+    addCommentToCard,
+    addAttachmentToCard,
+    deleteAttachmentFromCard,
   };
 }
 

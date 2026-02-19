@@ -7,11 +7,12 @@ import Navbar from '../../components/layout/Navbar';
 import List from '../../components/board/List';
 import AddList from '../../components/board/AddList';
 import BoardHeader from '../../components/board/BoardHeader';
+import CardModal from '../../components/card/CardModal';
 import Spinner from '../../components/ui/Spinner';
 import styles from './Board.module.css';
 
 function BoardContent() {
-  const { boardId } = useParams();
+  const { boardId, cardId } = useParams();
   const navigate = useNavigate();
   const {
     board,
@@ -139,6 +140,7 @@ function BoardContent() {
           )}
         </Droppable>
       </DragDropContext>
+      {cardId && <CardModal />}
     </div>
   );
 }

@@ -17,6 +17,7 @@ const {
   addComment,
   addAttachment,
   deleteAttachment,
+  getCardActivity,
 } = require('../controllers/cardController');
 
 const router = express.Router({ mergeParams: true });
@@ -43,6 +44,9 @@ router.delete('/:cardId/checklists/:checklistId', deleteChecklist);
 
 // Comments
 router.post('/:cardId/comments', addComment);
+
+// Activity
+router.get('/:cardId/activity', getCardActivity);
 
 // Attachments
 router.post('/:cardId/attachments', upload.single('file'), addAttachment);

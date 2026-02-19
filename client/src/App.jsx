@@ -29,6 +29,14 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/board/:boardId/card/:cardId"
+            element={
+              <ProtectedRoute>
+                <Board />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<Navigate to="/boards" replace />} />
         </Routes>
       </AuthProvider>

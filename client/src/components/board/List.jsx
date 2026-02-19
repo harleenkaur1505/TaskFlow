@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Droppable, Draggable } from '@hello-pangea/dnd';
 import useBoard from '../../hooks/useBoard';
 import Card from './Card';
@@ -8,6 +8,7 @@ import styles from './List.module.css';
 
 function List({ list, dragHandleProps }) {
   const { boardId } = useParams();
+  const navigate = useNavigate();
   const { updateList, removeList } = useBoard();
 
   // Inline title editing
@@ -203,7 +204,10 @@ function List({ list, dragHandleProps }) {
                         : dragProvided.draggableProps.style?.transform,
                     }}
                   >
-                    <Card card={card} />
+                    <Card
+                      card={card}
+                      onClick={() => navigate(`/board/${boardId}/card/${card._id}`)}
+                    />
                   </div>
                 )}
               </Draggable>
