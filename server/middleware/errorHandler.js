@@ -1,6 +1,22 @@
+const multer = require('multer');
 const ApiError = require('../utils/ApiError');
 
 const errorHandler = (err, req, res, next) => {
+  // Multer file upload errors
+  if (err instanceof multer.MulterError) {
+    const messages = {
+      LIMIT_FILE_SIZE: 'File is too large (max 10MB)',
+      LIMIT_UNEXPECTED_FILE: 'Unexpected file field',
+    };
+    return res.status(400).json({
+      error: {
+        message: messages[err.code] || 'File upload error',
+        code: 'FILE_UPLOAD_ERROR',
+        status: 400,
+      },
+    });
+  }
+
   // Mongoose validation error
   if (err.name === 'ValidationError') {
     const messages = Object.values(err.errors).map((e) => e.message);
@@ -48,7 +64,11 @@ const errorHandler = (err, req, res, next) => {
   }
 
   // Unknown / unexpected error
-  console.error('Unexpected error:', err);
+  if (process.env.NODE_ENV === 'production') {
+    console.error('Unexpected error:', err.message);
+  } else {
+    console.error('Unexpected error:', err);
+  }
 
   const status = err.status || 500;
   const message =
