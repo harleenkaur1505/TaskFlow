@@ -1,0 +1,135 @@
+.card {
+  background: var(--color-bg-primary);
+  border-radius: 8px;
+  box-shadow: 0 1px 1px rgba(9, 30, 66, 0.25);
+  cursor: pointer;
+  overflow: hidden;
+  transition: background var(--transition-fast);
+}
+
+.card:hover {
+  background: #F7F8F9;
+}
+
+[data-theme="dark"] .card:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Cover color strip */
+.cover {
+  height: 32px;
+  border-radius: 8px 8px 0 0;
+}
+
+/* Content */
+.content {
+  padding: 6px 8px 4px;
+}
+
+/* Labels row */
+.labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.label {
+  display: inline-block;
+  width: 40px;
+  height: 8px;
+  border-radius: 4px;
+}
+
+/* Title */
+.title {
+  display: block;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--color-text-primary);
+  word-break: break-word;
+}
+
+/* Badges row */
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  min-height: 0;
+}
+
+.badges:empty {
+  display: none;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  padding: 2px 4px;
+  border-radius: 3px;
+  line-height: 1;
+}
+
+/* Due date states */
+.dueBadge {
+  font-weight: 500;
+}
+
+.overdue {
+  background: var(--color-danger);
+  color: var(--color-text-inverse);
+}
+
+.dueToday {
+  background: var(--color-warning);
+  color: #172B4D;
+}
+
+.dueComplete {
+  background: var(--color-success);
+  color: var(--color-text-inverse);
+}
+
+/* Checklist complete */
+.checklistComplete {
+  background: var(--color-success);
+  color: var(--color-text-inverse);
+}
+
+/* Members */
+.members {
+  display: flex;
+  gap: -4px;
+  margin-left: auto;
+}
+
+.memberAvatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-inverse);
+  border: 2px solid var(--color-bg-primary);
+  margin-left: -4px;
+  overflow: hidden;
+}
+
+.memberAvatar:first-child {
+  margin-left: 0;
+}
+
+.memberAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

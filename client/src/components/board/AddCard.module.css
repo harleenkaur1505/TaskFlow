@@ -1,0 +1,95 @@
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  width: 100%;
+  height: 32px;
+  padding: 0 8px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.trigger:hover {
+  background: #D0D4DB;
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .trigger:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Form state */
+.form {
+  padding: 0;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 54px;
+  padding: 6px 8px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--color-text-primary);
+  background: var(--color-bg-primary);
+  box-shadow: 0 1px 1px rgba(9, 30, 66, 0.25);
+  outline: none;
+  resize: none;
+  line-height: 1.4;
+}
+
+.textarea::placeholder {
+  color: var(--color-text-secondary);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-top: 8px;
+}
+
+.addButton {
+  height: 32px;
+  padding: 0 12px;
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.addButton:hover {
+  background: var(--color-primary-hover);
+}
+
+.closeButton {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  border-radius: var(--border-radius-sm);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.closeButton:hover {
+  background: #D0D4DB;
+}
+
+[data-theme="dark"] .closeButton:hover {
+  background: rgba(255, 255, 255, 0.08);
+}

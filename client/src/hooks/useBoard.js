@@ -7,6 +7,12 @@ import {
   deleteList as deleteListApi,
   reorderLists as reorderListsApi,
 } from '../api/listsApi';
+import {
+  createCard as createCardApi,
+  deleteCard as deleteCardApi,
+  reorderCards as reorderCardsApi,
+  moveCard as moveCardApi,
+} from '../api/cardsApi';
 
 function useBoard() {
   const context = useContext(BoardContext);
@@ -62,6 +68,45 @@ function useBoard() {
     await reorderListsApi(boardId, listPositions);
   }, [dispatch]);
 
+  const addCard = useCallback(async (boardId, listId, title) => {
+    const newCard = await createCardApi(boardId, { title, listId });
+    dispatch({ type: 'ADD_CARD', payload: { listId, card: newCard } });
+    return newCard;
+  }, [dispatch]);
+
+  const removeCard = useCallback(async (boardId, listId, cardId) => {
+    dispatch({ type: 'DELETE_CARD', payload: { listId, cardId } });
+    await deleteCardApi(boardId, cardId);
+  }, [dispatch]);
+
+  const reorderCardsAction = useCallback(async (boardId, listId, reorderedCards) => {
+    // Optimistic: update local state immediately
+    dispatch({ type: 'REORDER_CARDS', payload: { listId, cards: reorderedCards } });
+
+    const cardPositions = reorderedCards.map((card, index) => ({
+      cardId: card._id,
+      position: index,
+    }));
+    await reorderCardsApi(boardId, { listId, cards: cardPositions });
+  }, [dispatch]);
+
+  const moveCardAction = useCallback(async (
+    boardId, sourceListId, destListId, sourceCards, destCards, cardId, newPosition,
+  ) => {
+    // Optimistic: update local state immediately
+    dispatch({
+      type: 'MOVE_CARD',
+      payload: { sourceListId, destListId, sourceCards, destCards },
+    });
+
+    await moveCardApi(boardId, {
+      cardId,
+      sourceListId,
+      destinationListId: destListId,
+      newPosition,
+    });
+  }, [dispatch]);
+
   return {
     board,
     lists,
@@ -72,6 +117,10 @@ function useBoard() {
     updateList,
     removeList,
     reorderLists: reorderListsAction,
+    addCard,
+    removeCard,
+    reorderCards: reorderCardsAction,
+    moveCard: moveCardAction,
   };
 }
 

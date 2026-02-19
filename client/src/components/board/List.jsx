@@ -1,6 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Droppable, Draggable } from '@hello-pangea/dnd';
 import useBoard from '../../hooks/useBoard';
+import Card from './Card';
+import AddCard from './AddCard';
 import styles from './List.module.css';
 
 function List({ list, dragHandleProps }) {
@@ -63,6 +66,8 @@ function List({ list, dragHandleProps }) {
     setMenuOpen(false);
     setShowDeleteConfirm(false);
   };
+
+  const cards = list.cards || [];
 
   return (
     <div className={styles.list}>
@@ -166,26 +171,50 @@ function List({ list, dragHandleProps }) {
         </div>
       </div>
 
-      <div className={styles.cards}>
-        {list.cards && list.cards.length > 0 ? (
-          list.cards.map((card) => (
-            <div key={card._id} className={styles.cardPlaceholder}>
-              {card.title}
-            </div>
-          ))
-        ) : (
-          <div className={styles.emptyCards} />
+      <Droppable droppableId={list._id} type="CARD">
+        {(provided, snapshot) => (
+          <div
+            className={styles.cards}
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            style={{
+              backgroundColor: snapshot.isDraggingOver
+                ? 'rgba(0, 0, 0, 0.04)'
+                : 'transparent',
+            }}
+          >
+            {cards.map((card, index) => (
+              <Draggable
+                key={card._id}
+                draggableId={card._id}
+                index={index}
+              >
+                {(dragProvided, dragSnapshot) => (
+                  <div
+                    ref={dragProvided.innerRef}
+                    {...dragProvided.draggableProps}
+                    {...dragProvided.dragHandleProps}
+                    className={styles.cardWrapper}
+                    style={{
+                      ...dragProvided.draggableProps.style,
+                      opacity: dragSnapshot.isDragging ? 0.9 : 1,
+                      transform: dragSnapshot.isDragging
+                        ? `${dragProvided.draggableProps.style?.transform || ''} rotate(3deg)`
+                        : dragProvided.draggableProps.style?.transform,
+                    }}
+                  >
+                    <Card card={card} />
+                  </div>
+                )}
+              </Draggable>
+            ))}
+            {provided.placeholder}
+          </div>
         )}
-      </div>
+      </Droppable>
 
       <div className={styles.footer}>
-        <button className={styles.addCardButton} type="button">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M7 2v10M2 7h10" stroke="currentColor" strokeWidth="1.5"
-              strokeLinecap="round" />
-          </svg>
-          Add a card
-        </button>
+        <AddCard listId={list._id} />
       </div>
     </div>
   );

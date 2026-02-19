@@ -32,13 +32,19 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
+// Static files (uploads)
+const path = require('path');
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // Routes
 const authRoutes = require('./routes/auth');
 const boardRoutes = require('./routes/boards');
 const listRoutes = require('./routes/lists');
+const cardRoutes = require('./routes/cards');
 app.use('/api/auth', authRoutes);
 app.use('/api/boards', boardRoutes);
 app.use('/api/boards/:boardId/lists', listRoutes);
+app.use('/api/boards/:boardId/cards', cardRoutes);
 
 // Global error handler (must be after routes)
 const errorHandler = require('./middleware/errorHandler');

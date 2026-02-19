@@ -19,6 +19,8 @@ function BoardContent() {
     isLoading,
     fetchBoard,
     reorderLists,
+    reorderCards,
+    moveCard,
   } = useBoard();
 
   useEffect(() => {
@@ -28,7 +30,7 @@ function BoardContent() {
   }, [boardId, fetchBoard, navigate]);
 
   const handleDragEnd = useCallback((result) => {
-    const { destination, source, type } = result;
+    const { destination, source, type, draggableId } = result;
 
     if (!destination) return;
     if (
@@ -38,13 +40,50 @@ function BoardContent() {
       return;
     }
 
+    // Dragging lists horizontally
     if (type === 'LIST') {
       const reordered = Array.from(lists);
       const [moved] = reordered.splice(source.index, 1);
       reordered.splice(destination.index, 0, moved);
       reorderLists(boardId, reordered);
+      return;
     }
-  }, [lists, boardId, reorderLists]);
+
+    // Dragging cards
+    if (type === 'CARD') {
+      const sourceListId = source.droppableId;
+      const destListId = destination.droppableId;
+      const sourceList = lists.find((l) => l._id === sourceListId);
+      const destList = lists.find((l) => l._id === destListId);
+
+      if (!sourceList || !destList) return;
+
+      // Same list reorder
+      if (sourceListId === destListId) {
+        const reordered = Array.from(sourceList.cards || []);
+        const [moved] = reordered.splice(source.index, 1);
+        reordered.splice(destination.index, 0, moved);
+        reorderCards(boardId, sourceListId, reordered);
+        return;
+      }
+
+      // Cross-list move
+      const sourceCards = Array.from(sourceList.cards || []);
+      const destCards = Array.from(destList.cards || []);
+      const [movedCard] = sourceCards.splice(source.index, 1);
+      destCards.splice(destination.index, 0, movedCard);
+
+      moveCard(
+        boardId,
+        sourceListId,
+        destListId,
+        sourceCards,
+        destCards,
+        draggableId,
+        destination.index,
+      );
+    }
+  }, [lists, boardId, reorderLists, reorderCards, moveCard]);
 
   if (isLoading) {
     return (
