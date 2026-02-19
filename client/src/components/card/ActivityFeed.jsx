@@ -2,6 +2,69 @@ import { useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import styles from './ActivityFeed.module.css';
 
+function formatAction(activity) {
+  switch (activity.type) {
+    case 'card:created':
+      return 'created this card';
+    case 'card:moved':
+      return `moved this card from ${activity.data?.fromList?.title || '?'} to ${activity.data?.toList?.title || '?'}`;
+    case 'card:title_changed':
+      return 'changed the title';
+    case 'card:description_changed':
+      return 'updated the description';
+    case 'card:due_date_set':
+      return 'set the due date';
+    case 'card:due_date_changed':
+      return 'changed the due date';
+    case 'card:due_date_removed':
+      return 'removed the due date';
+    case 'card:due_complete':
+      return 'marked the due date complete';
+    case 'card:due_incomplete':
+      return 'marked the due date incomplete';
+    case 'card:member_added':
+      return `added ${activity.data?.member?.name || 'a member'}`;
+    case 'card:member_removed':
+      return `removed ${activity.data?.member?.name || 'a member'}`;
+    case 'card:label_added':
+      return 'added a label';
+    case 'card:label_removed':
+      return 'removed a label';
+    case 'card:checklist_added':
+      return `added checklist "${activity.data?.title || ''}"`;
+    case 'card:checklist_completed':
+      return 'completed a checklist';
+    case 'card:checklist_deleted':
+      return 'deleted a checklist';
+    case 'card:attachment_added':
+      return `attached ${activity.data?.filename || 'a file'}`;
+    case 'card:attachment_removed':
+      return `removed attachment ${activity.data?.filename || ''}`;
+    case 'card:deleted':
+      return `deleted card "${activity.data?.title || ''}"`;
+    case 'card:comment':
+      return null;
+    case 'list:created':
+      return `created list "${activity.data?.title || ''}"`;
+    case 'list:renamed':
+      return `renamed list "${activity.data?.oldTitle || ''}" to "${activity.data?.newTitle || ''}"`;
+    case 'list:deleted':
+      return `deleted list "${activity.data?.title || ''}"`;
+    case 'list:reordered':
+      return 'reordered lists';
+    case 'board:member_added':
+      return `added ${activity.data?.member?.name || 'a member'} to the board`;
+    case 'board:member_removed':
+      return `removed ${activity.data?.member?.name || 'a member'} from the board`;
+    default:
+      return activity.type?.replace(/^(card|list|board):/, '') || 'made a change';
+  }
+}
+
+function getInitial(name) {
+  return name?.charAt(0).toUpperCase() || '?';
+}
+
 function ActivityFeed({ activities, onAddComment }) {
   const [comment, setComment] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,47 +90,6 @@ function ActivityFeed({ activities, onAddComment }) {
       handleSubmit();
     }
   };
-
-  const formatAction = (activity) => {
-    switch (activity.type) {
-      case 'card:created':
-        return 'created this card';
-      case 'card:moved':
-        return `moved this card from ${activity.data?.fromList?.title || '?'} to ${activity.data?.toList?.title || '?'}`;
-      case 'card:title_changed':
-        return 'changed the title';
-      case 'card:description_changed':
-        return 'updated the description';
-      case 'card:due_date_set':
-        return 'set the due date';
-      case 'card:due_date_changed':
-        return 'changed the due date';
-      case 'card:due_date_removed':
-        return 'removed the due date';
-      case 'card:due_complete':
-        return 'marked the due date complete';
-      case 'card:due_incomplete':
-        return 'marked the due date incomplete';
-      case 'card:member_added':
-        return `added ${activity.data?.member?.name || 'a member'}`;
-      case 'card:member_removed':
-        return `removed ${activity.data?.member?.name || 'a member'}`;
-      case 'card:label_added':
-        return 'added a label';
-      case 'card:label_removed':
-        return 'removed a label';
-      case 'card:checklist_added':
-        return `added checklist "${activity.data?.title || ''}"`;
-      case 'card:checklist_deleted':
-        return 'deleted a checklist';
-      case 'card:comment':
-        return null; // handled separately
-      default:
-        return activity.type?.replace('card:', '') || 'made a change';
-    }
-  };
-
-  const getInitial = (name) => name?.charAt(0).toUpperCase() || '?';
 
   const items = activities || [];
 
@@ -150,4 +172,5 @@ function ActivityFeed({ activities, onAddComment }) {
   );
 }
 
+export { formatAction, getInitial };
 export default ActivityFeed;

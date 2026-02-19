@@ -4,6 +4,7 @@ const Card = require('../models/Card');
 const Activity = require('../models/Activity');
 const User = require('../models/User');
 const ApiError = require('../utils/ApiError');
+const { logActivity } = require('../services/activityService');
 
 const getBoards = async (req, res, next) => {
   try {
@@ -146,6 +147,10 @@ const addMember = async (req, res, next) => {
       .populate('owner', 'name email avatar')
       .populate('members', 'name email avatar');
 
+    logActivity(req.user.id, board._id, null, 'board:member_added', {
+      member: { id: user._id, name: user.name },
+    });
+
     res.json({ data: updated });
   } catch (error) {
     next(error);
@@ -173,12 +178,19 @@ const removeMember = async (req, res, next) => {
       throw new ApiError(400, 'User is not a board member', 'NOT_A_MEMBER');
     }
 
+    // Get member name before removing
+    const member = await User.findById(userId).select('name');
+
     board.members.splice(memberIndex, 1);
     await board.save();
 
     const updated = await Board.findById(board._id)
       .populate('owner', 'name email avatar')
       .populate('members', 'name email avatar');
+
+    logActivity(req.user.id, board._id, null, 'board:member_removed', {
+      member: { id: userId, name: member?.name },
+    });
 
     res.json({ data: updated });
   } catch (error) {

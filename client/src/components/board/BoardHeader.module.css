@@ -86,3 +86,23 @@
   object-fit: cover;
   border-radius: 50%;
 }
+
+.activityBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-inverse);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  margin-left: var(--space-sm);
+}
+
+.activityBtn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}

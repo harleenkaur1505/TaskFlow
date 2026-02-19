@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import { BoardProvider } from '../../context/BoardContext';
@@ -8,12 +8,14 @@ import List from '../../components/board/List';
 import AddList from '../../components/board/AddList';
 import BoardHeader from '../../components/board/BoardHeader';
 import CardModal from '../../components/card/CardModal';
+import ActivitySidebar from '../../components/board/ActivitySidebar';
 import Spinner from '../../components/ui/Spinner';
 import styles from './Board.module.css';
 
 function BoardContent() {
   const { boardId, cardId } = useParams();
   const navigate = useNavigate();
+  const [showActivity, setShowActivity] = useState(false);
   const {
     board,
     lists,
@@ -101,7 +103,10 @@ function BoardContent() {
   return (
     <div className={styles.page} style={bgStyle}>
       <Navbar />
-      <BoardHeader />
+      <BoardHeader
+        onToggleActivity={() => setShowActivity((prev) => !prev)}
+        activityOpen={showActivity}
+      />
       <DragDropContext onDragEnd={handleDragEnd}>
         <Droppable droppableId="board" direction="horizontal" type="LIST">
           {(provided) => (
@@ -141,6 +146,12 @@ function BoardContent() {
         </Droppable>
       </DragDropContext>
       {cardId && <CardModal />}
+      {showActivity && (
+        <ActivitySidebar
+          boardId={boardId}
+          onClose={() => setShowActivity(false)}
+        />
+      )}
     </div>
   );
 }

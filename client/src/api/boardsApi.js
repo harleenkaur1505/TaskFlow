@@ -39,3 +39,8 @@ export const removeMember = async (boardId, userId) => {
   const { data } = await api.delete(`/boards/${boardId}/members/${userId}`);
   return data.data;
 };
+
+export const getBoardActivity = async (boardId, page = 1, limit = 20) => {
+  const { data } = await api.get(`/boards/${boardId}/activity?page=${page}&limit=${limit}`);
+  return data;
+};

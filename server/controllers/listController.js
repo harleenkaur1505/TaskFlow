@@ -2,6 +2,7 @@ const List = require('../models/List');
 const Card = require('../models/Card');
 const Board = require('../models/Board');
 const ApiError = require('../utils/ApiError');
+const { logActivity } = require('../services/activityService');
 
 const createList = async (req, res, next) => {
   try {
@@ -20,6 +21,10 @@ const createList = async (req, res, next) => {
       position: listCount,
     });
 
+    logActivity(req.user.id, boardId, null, 'list:created', {
+      title: list.title,
+    });
+
     res.status(201).json({ data: list });
   } catch (error) {
     next(error);
@@ -29,7 +34,7 @@ const createList = async (req, res, next) => {
 const updateList = async (req, res, next) => {
   try {
     const { title } = req.body;
-    const { listId } = req.params;
+    const { listId, boardId } = req.params;
 
     if (!title || !title.trim()) {
       throw new ApiError(400, 'List title is required', 'TITLE_REQUIRED');
@@ -41,8 +46,16 @@ const updateList = async (req, res, next) => {
       throw new ApiError(404, 'List not found', 'LIST_NOT_FOUND');
     }
 
+    const oldTitle = list.title;
     list.title = title.trim();
     await list.save();
+
+    if (oldTitle !== list.title) {
+      logActivity(req.user.id, boardId, null, 'list:renamed', {
+        oldTitle,
+        newTitle: list.title,
+      });
+    }
 
     res.json({ data: list });
   } catch (error) {
@@ -59,6 +72,8 @@ const deleteList = async (req, res, next) => {
     if (!list) {
       throw new ApiError(404, 'List not found', 'LIST_NOT_FOUND');
     }
+
+    const listTitle = list.title;
 
     // Delete all cards in the list
     await Card.deleteMany({ list: listId });
@@ -78,6 +93,10 @@ const deleteList = async (req, res, next) => {
       await List.bulkWrite(bulkOps);
     }
 
+    logActivity(req.user.id, boardId, null, 'list:deleted', {
+      title: listTitle,
+    });
+
     res.json({ data: { message: 'List deleted' } });
   } catch (error) {
     next(error);
@@ -87,6 +106,7 @@ const deleteList = async (req, res, next) => {
 const reorderLists = async (req, res, next) => {
   try {
     const { lists } = req.body;
+    const { boardId } = req.params;
 
     if (!Array.isArray(lists) || lists.length === 0) {
       throw new ApiError(400, 'Lists array is required', 'LISTS_REQUIRED');
@@ -100,6 +120,8 @@ const reorderLists = async (req, res, next) => {
     }));
 
     await List.bulkWrite(bulkOps);
+
+    logActivity(req.user.id, boardId, null, 'list:reordered', {});
 
     res.json({ data: { message: 'Lists reordered' } });
   } catch (error) {
