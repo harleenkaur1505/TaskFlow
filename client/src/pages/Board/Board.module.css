@@ -15,23 +15,20 @@
 .listsContainer {
   display: flex;
   align-items: flex-start;
-  padding: 12px;
-  gap: 12px;
+  padding: 16px 20px;
+  gap: 14px;
   flex: 1;
   overflow-x: auto;
   overflow-y: hidden;
   scroll-behavior: smooth;
-  padding-top: 12px;
-  /* Smooth touch scrolling on mobile/tablet */
   -webkit-overflow-scrolling: touch;
 }
 
 .listWrapper {
   flex-shrink: 0;
-  width: 272px;
+  width: 280px;
 }
 
-/* Empty board state */
 .emptyBoard {
   flex: 1;
   display: flex;
@@ -52,11 +49,10 @@
   margin-bottom: var(--space-sm);
 }
 
-/* Responsive: mobile single column */
 @media (max-width: 768px) {
   .listsContainer {
-    padding: 8px;
-    gap: 8px;
+    padding: 10px 12px;
+    gap: 10px;
   }
 
   .listWrapper {

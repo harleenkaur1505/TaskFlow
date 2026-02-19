@@ -20,10 +20,12 @@ function BoardCard({ board, isStarred, onToggleStar }) {
     }
   };
 
+  const memberCount = board.members?.length || 0;
+
   return (
     <div
       className={styles.card}
-      style={{ backgroundColor: board.background || '#0079BF' }}
+      style={{ backgroundColor: board.background || '#6C63FF' }}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       role="button"
@@ -45,7 +47,19 @@ function BoardCard({ board, isStarred, onToggleStar }) {
           />
         </svg>
       </button>
-      <span className={styles.title}>{board.title}</span>
+      <div className={styles.cardContent}>
+        <span className={styles.title}>{board.title}</span>
+        {memberCount > 0 && (
+          <div className={styles.meta}>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <circle cx="6" cy="4" r="2.5" stroke="currentColor" strokeWidth="1.1" />
+              <path d="M1.5 10.5c0-2 1.8-3.5 4.5-3.5s4.5 1.5 4.5 3.5"
+                stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />
+            </svg>
+            <span>{memberCount}</span>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

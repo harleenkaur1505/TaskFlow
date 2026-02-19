@@ -6,7 +6,8 @@
   height: calc(100vh - 48px);
   background: var(--color-bg-elevated);
   border-left: 1px solid var(--color-border);
-  box-shadow: var(--shadow-lg);
+  border-radius: 0;
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   z-index: var(--z-dropdown);
@@ -26,23 +27,23 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 52px;
-  padding: 0 16px;
+  height: 56px;
+  padding: 0 20px;
   border-bottom: 1px solid var(--color-border);
   flex-shrink: 0;
 }
 
 .title {
-  font-size: var(--font-size-md);
+  font-size: 15px;
   font-weight: 600;
   color: var(--color-text-primary);
   margin: 0;
 }
 
 .closeBtn {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   border: none;
   background: transparent;
   color: var(--color-text-secondary);
@@ -50,7 +51,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background var(--transition-fast);
+  font-family: var(--font-family);
+  transition: background 150ms ease, color 150ms ease;
 }
 
 .closeBtn:hover {
@@ -61,7 +63,7 @@
 .feed {
   flex: 1;
   overflow-y: auto;
-  padding: 16px;
+  padding: 16px 20px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -112,7 +114,7 @@
 }
 
 .timestamp {
-  color: var(--color-text-secondary);
+  color: var(--color-text-tertiary, var(--color-text-secondary));
   font-size: var(--font-size-xs);
 }
 
@@ -144,9 +146,10 @@
   border: none;
   font-size: 13px;
   font-weight: 500;
+  font-family: var(--font-family);
   color: var(--color-primary);
   cursor: pointer;
-  transition: color var(--transition-fast);
+  transition: color 150ms ease;
 }
 
 .loadMoreBtn:hover:not(:disabled) {

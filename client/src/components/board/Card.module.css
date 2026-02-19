@@ -1,25 +1,30 @@
 .card {
   background: var(--color-bg-elevated);
-  border-radius: var(--border-radius-md);
-  box-shadow: var(--shadow-sm);
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
   cursor: pointer;
   overflow: hidden;
-  transition: background var(--transition-fast);
+  transition: background 150ms ease, box-shadow 150ms ease, transform 150ms ease;
 }
 
 .card:hover {
-  background: var(--color-bg-tertiary);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
 }
 
 /* Cover color strip */
 .cover {
-  height: 32px;
-  border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+  height: 6px;
 }
 
 /* Content */
 .content {
-  padding: 6px 8px 4px;
+  padding: 8px 10px 6px;
 }
 
 /* Labels row */
@@ -27,23 +32,24 @@
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .label {
   display: inline-block;
   width: 40px;
-  height: 8px;
-  border-radius: 4px;
+  height: 6px;
+  border-radius: 3px;
 }
 
 /* Title */
 .title {
   display: block;
-  font-size: 14px;
-  line-height: 1.4;
+  font-size: 13.5px;
+  line-height: 1.45;
   color: var(--color-text-primary);
   word-break: break-word;
+  font-weight: 450;
 }
 
 /* Badges row */
@@ -51,8 +57,8 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 4px;
-  margin-top: 4px;
+  gap: 6px;
+  margin-top: 8px;
   min-height: 0;
 }
 
@@ -63,11 +69,11 @@
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 2px;
+  gap: 3px;
   font-size: 11px;
-  color: var(--color-text-secondary);
-  padding: 2px 4px;
-  border-radius: 3px;
+  color: var(--color-text-tertiary);
+  padding: 2px 5px;
+  border-radius: 4px;
   line-height: 1;
 }
 
@@ -78,7 +84,7 @@
 
 .overdue {
   background: var(--color-danger);
-  color: var(--color-text-inverse);
+  color: #FFFFFF;
 }
 
 .dueToday {
@@ -88,33 +94,31 @@
 
 .dueComplete {
   background: var(--color-success);
-  color: var(--color-text-inverse);
+  color: #FFFFFF;
 }
 
-/* Checklist complete */
 .checklistComplete {
   background: var(--color-success);
-  color: var(--color-text-inverse);
+  color: #FFFFFF;
 }
 
 /* Members */
 .members {
   display: flex;
-  gap: -4px;
   margin-left: auto;
 }
 
 .memberAvatar {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
-  color: var(--color-text-inverse);
+  color: #FFFFFF;
   border: 2px solid var(--color-bg-elevated);
   margin-left: -4px;
   overflow: hidden;

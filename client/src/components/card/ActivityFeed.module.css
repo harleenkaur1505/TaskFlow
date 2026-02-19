@@ -15,9 +15,11 @@
 }
 
 .title {
-  font-size: var(--font-size-md);
+  font-size: 11px;
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--color-text-tertiary, var(--color-text-secondary));
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   margin: 0;
 }
 
@@ -33,15 +35,15 @@
   width: 100%;
   min-height: 36px;
   padding: 8px 12px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-md);
+  border: 1.5px solid var(--color-border);
+  border-radius: 10px;
   font-family: var(--font-family);
   font-size: var(--font-size-sm);
   color: var(--color-text-primary);
   background: var(--color-bg-primary);
   resize: none;
   outline: none;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 
 .commentInput:focus {
@@ -52,14 +54,15 @@
 .commentBtn {
   align-self: flex-start;
   background: var(--color-primary);
-  color: var(--color-text-inverse);
+  color: #FFFFFF;
   border: none;
-  border-radius: var(--border-radius-sm);
+  border-radius: 8px;
   padding: 6px 16px;
   font-size: var(--font-size-sm);
   font-weight: 500;
+  font-family: var(--font-family);
   cursor: pointer;
-  transition: background var(--transition-fast);
+  transition: background 150ms ease;
 }
 
 .commentBtn:hover:not(:disabled) {
@@ -75,7 +78,7 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  gap: 12px;
 }
 
 .entry {
@@ -91,9 +94,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  color: white;
+  color: #FFFFFF;
   flex-shrink: 0;
   overflow: hidden;
 }
@@ -122,7 +125,7 @@
 }
 
 .timestamp {
-  color: var(--color-text-secondary);
+  color: var(--color-text-tertiary, var(--color-text-secondary));
   font-size: var(--font-size-xs);
 }
 
@@ -136,7 +139,7 @@
 .commentBody {
   background: var(--color-bg-tertiary);
   border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-md);
+  border-radius: 10px;
   padding: 8px 12px;
   font-size: 13px;
   color: var(--color-text-primary);

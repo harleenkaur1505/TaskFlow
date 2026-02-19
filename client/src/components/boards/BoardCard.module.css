@@ -1,18 +1,19 @@
 .card {
   position: relative;
-  aspect-ratio: 5 / 3;
-  border-radius: var(--border-radius-md);
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
   cursor: pointer;
   overflow: hidden;
   display: flex;
-  align-items: flex-end;
-  box-shadow: var(--shadow-sm);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  flex-direction: column;
+  justify-content: flex-end;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card:focus-visible {
@@ -24,18 +25,25 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 40%,
-    rgba(0, 0, 0, 0.15) 70%,
-    rgba(0, 0, 0, 0.35) 100%
+    180deg,
+    rgba(0, 0, 0, 0) 30%,
+    rgba(0, 0, 0, 0.1) 60%,
+    rgba(0, 0, 0, 0.4) 100%
   );
   pointer-events: none;
 }
 
-.title {
+.cardContent {
   position: relative;
-  padding: var(--space-sm) var(--space-sm);
-  color: var(--color-text-inverse);
+  z-index: 1;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  color: #FFFFFF;
   font-size: 15px;
   font-weight: 600;
   line-height: 1.3;
@@ -43,41 +51,51 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .star {
   position: absolute;
-  top: var(--space-xs);
-  right: var(--space-xs);
-  width: 28px;
-  height: 28px;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
-  background: none;
-  color: rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.15);
+  color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
-  border-radius: var(--border-radius-sm);
+  border-radius: 8px;
   padding: 0;
   z-index: 2;
-  transition: color var(--transition-fast), transform var(--transition-fast);
+  transition: color 150ms ease, transform 150ms ease, background 150ms ease;
+  backdrop-filter: blur(4px);
 }
 
 .star svg {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
 }
 
 .star:hover {
-  color: rgba(255, 255, 255, 1);
+  color: #FFFFFF;
+  background: rgba(0, 0, 0, 0.25);
   transform: scale(1.1);
 }
 
 .starred {
   color: #F2D600;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .starred:hover {

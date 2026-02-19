@@ -25,13 +25,14 @@
   margin-left: auto;
   background: var(--color-bg-tertiary);
   border: none;
-  border-radius: var(--border-radius-sm);
+  border-radius: 8px;
   padding: 4px 12px;
   font-size: var(--font-size-xs);
   font-weight: 500;
+  font-family: var(--font-family);
   color: var(--color-text-primary);
   cursor: pointer;
-  transition: background var(--transition-fast);
+  transition: background 150ms ease;
 }
 
 .editBtn:hover {
@@ -54,10 +55,11 @@
   border: none;
   padding: 4px 8px;
   font-size: var(--font-size-sm);
+  font-family: var(--font-family);
   color: var(--color-text-secondary);
   cursor: pointer;
-  border-radius: var(--border-radius-sm);
-  transition: background var(--transition-fast);
+  border-radius: 6px;
+  transition: background 150ms ease;
 }
 
 .tab:hover {
@@ -73,16 +75,16 @@
 .textarea {
   width: 100%;
   min-height: 108px;
-  padding: 8px 12px;
-  border: 2px solid var(--color-border);
-  border-radius: var(--border-radius-sm);
+  padding: 10px 12px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 10px;
   font-family: var(--font-family);
   font-size: var(--font-size-sm);
   color: var(--color-text-primary);
   background: var(--color-bg-primary);
   resize: vertical;
   outline: none;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 
 .textarea:focus {
@@ -92,9 +94,9 @@
 
 .preview {
   min-height: 108px;
-  padding: 8px 12px;
+  padding: 10px 12px;
   border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-sm);
+  border-radius: 10px;
   font-size: var(--font-size-sm);
   color: var(--color-text-primary);
   white-space: pre-wrap;
@@ -110,14 +112,15 @@
 
 .saveBtn {
   background: var(--color-primary);
-  color: var(--color-text-inverse);
+  color: #FFFFFF;
   border: none;
-  border-radius: var(--border-radius-sm);
+  border-radius: 8px;
   padding: 6px 16px;
   font-size: var(--font-size-sm);
   font-weight: 500;
+  font-family: var(--font-family);
   cursor: pointer;
-  transition: background var(--transition-fast);
+  transition: background 150ms ease;
 }
 
 .saveBtn:hover {
@@ -139,16 +142,16 @@
 
 .display {
   min-height: 56px;
-  padding: 8px 12px;
+  padding: 10px 12px;
   background: var(--color-bg-tertiary);
-  border-radius: var(--border-radius-sm);
+  border-radius: 10px;
   font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
+  color: var(--color-text-tertiary, var(--color-text-secondary));
   cursor: pointer;
   white-space: pre-wrap;
   word-break: break-word;
   line-height: 1.5;
-  transition: background var(--transition-fast);
+  transition: background 150ms ease;
 }
 
 .display:hover {

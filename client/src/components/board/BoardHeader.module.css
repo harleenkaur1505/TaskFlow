@@ -2,10 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 52px;
-  padding: 0 var(--space-md);
-  background: rgba(0, 0, 0, 0.12);
-  /* Below the fixed navbar */
+  height: 56px;
+  padding: 0 20px;
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(8px);
   margin-top: 52px;
   flex-shrink: 0;
 }
@@ -21,28 +21,30 @@
   border: none;
   font-size: 18px;
   font-weight: 700;
-  color: var(--color-text-inverse);
+  color: #FFFFFF;
   cursor: pointer;
-  padding: 4px 8px;
-  border-radius: var(--border-radius-sm);
-  transition: background var(--transition-fast);
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background 150ms ease;
   max-width: 400px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  letter-spacing: -0.2px;
 }
 
 .titleButton:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .titleInput {
   font-size: 18px;
   font-weight: 700;
   color: var(--color-text-primary);
-  padding: 4px 8px;
+  padding: 6px 10px;
   border: 2px solid var(--color-primary);
-  border-radius: var(--border-radius-sm);
+  border-radius: 8px;
   background: var(--color-bg-primary);
   outline: none;
   width: 300px;
@@ -52,7 +54,7 @@
 .right {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
+  gap: 10px;
 }
 
 .members {
@@ -61,23 +63,24 @@
 }
 
 .memberAvatar {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  border: 2px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.25);
+  border: 2px solid rgba(255, 255, 255, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
-  color: var(--color-text-inverse);
+  color: #FFFFFF;
   overflow: hidden;
   cursor: default;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
 }
 
 .memberAvatar + .memberAvatar {
-  margin-left: -6px;
+  margin-left: -8px;
 }
 
 .memberAvatar img {
@@ -91,18 +94,20 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  border-radius: var(--border-radius-sm);
-  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 7px 14px;
   font-size: 13px;
   font-weight: 500;
-  color: var(--color-text-inverse);
+  color: #FFFFFF;
   cursor: pointer;
-  transition: background var(--transition-fast);
-  margin-left: var(--space-sm);
+  transition: background 150ms ease;
+  margin-left: var(--space-xs);
+  font-family: var(--font-family);
 }
 
 .activityBtn:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.25);
 }

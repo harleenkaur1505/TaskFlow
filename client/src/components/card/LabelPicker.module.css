@@ -2,8 +2,8 @@
   position: absolute;
   width: 300px;
   background: var(--color-bg-elevated);
-  border-radius: var(--border-radius-md);
-  box-shadow: var(--shadow-lg);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 16px 40px rgba(0, 0, 0, 0.12);
   border: 1px solid var(--color-border);
   z-index: var(--z-dropdown);
   overflow: hidden;
@@ -53,15 +53,15 @@
 .searchInput {
   width: 100%;
   height: 32px;
-  border: 2px solid var(--color-border);
-  border-radius: var(--border-radius-sm);
-  padding: 0 8px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0 10px;
   font-size: 13px;
   font-family: var(--font-family);
   color: var(--color-text-primary);
   background: var(--color-bg-primary);
   outline: none;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 
 .searchInput:focus {
@@ -79,7 +79,7 @@
   display: block;
   font-size: 11px;
   font-weight: 600;
-  color: var(--color-text-secondary);
+  color: var(--color-text-tertiary, var(--color-text-secondary));
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 4px;
@@ -97,14 +97,14 @@
   height: 16px;
   flex-shrink: 0;
   border: 2px solid var(--color-border);
-  border-radius: 2px;
+  border-radius: 4px;
   background: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
-  transition: all var(--transition-fast);
+  transition: all 150ms ease;
 }
 
 .checked {
@@ -115,13 +115,13 @@
 .colorChip {
   flex: 1;
   height: 32px;
-  border-radius: var(--border-radius-sm);
+  border-radius: 8px;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   padding: 0 8px;
-  transition: opacity var(--transition-fast);
+  transition: opacity 150ms ease;
 }
 
 .colorChip:hover {
@@ -145,12 +145,13 @@
   height: 32px;
   background: var(--color-bg-tertiary);
   border: none;
-  border-radius: var(--border-radius-sm);
+  border-radius: 8px;
   font-size: 13px;
   font-weight: 500;
+  font-family: var(--font-family);
   color: var(--color-text-primary);
   cursor: pointer;
-  transition: background var(--transition-fast);
+  transition: background 150ms ease;
 }
 
 .createBtn:hover {
@@ -164,16 +165,16 @@
 .nameInput {
   width: 100%;
   height: 32px;
-  border: 2px solid var(--color-border);
-  border-radius: var(--border-radius-sm);
-  padding: 0 8px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0 10px;
   font-size: 13px;
   font-family: var(--font-family);
   color: var(--color-text-primary);
   background: var(--color-bg-primary);
   outline: none;
   margin-bottom: 8px;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 
 .nameInput:focus {
@@ -191,14 +192,14 @@
 .colorSwatch {
   width: 100%;
   aspect-ratio: 1;
-  border-radius: var(--border-radius-sm);
+  border-radius: 8px;
   border: 2px solid transparent;
   cursor: pointer;
-  transition: transform var(--transition-fast);
+  transition: transform 150ms ease;
 }
 
 .colorSwatch:hover {
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
 
 .colorSelected {
@@ -213,14 +214,15 @@
 
 .saveBtn {
   background: var(--color-primary);
-  color: var(--color-text-inverse);
+  color: #FFFFFF;
   border: none;
-  border-radius: var(--border-radius-sm);
+  border-radius: 8px;
   padding: 6px 16px;
   font-size: var(--font-size-sm);
   font-weight: 500;
+  font-family: var(--font-family);
   cursor: pointer;
-  transition: background var(--transition-fast);
+  transition: background 150ms ease;
 }
 
 .saveBtn:hover {

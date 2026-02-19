@@ -49,26 +49,30 @@ function Profile() {
     <>
       <Navbar />
       <div className={styles.page}>
-        <div className={styles.header}>
-          <h1 className={styles.title}>Profile</h1>
-          <p className={styles.subtitle}>Manage your personal information</p>
+        <div className={styles.pageHeader}>
+          <h1 className={styles.pageTitle}>Profile</h1>
+          <p className={styles.pageSubtitle}>Manage your account settings</p>
         </div>
 
-        <div className={styles.avatarSection}>
-          <div className={styles.avatarCircle}>
-            {user?.avatar ? (
-              <img src={user.avatar} alt={user.name} className={styles.avatarImg} />
-            ) : (
-              <span className={styles.avatarInitials}>{getInitials(user?.name)}</span>
-            )}
-          </div>
-          <div className={styles.avatarActions}>
+        <div className={styles.card}>
+          <div className={styles.avatarSection}>
             <button
-              className={styles.uploadBtn}
+              className={styles.avatarCircle}
               onClick={handleAvatarClick}
               type="button"
+              aria-label="Change avatar"
             >
-              Upload photo
+              {user?.avatar ? (
+                <img src={user.avatar} alt={user.name} className={styles.avatarImg} />
+              ) : (
+                <span className={styles.avatarInitials}>{getInitials(user?.name)}</span>
+              )}
+              <div className={styles.avatarOverlay}>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M2.5 11.5V13.5H4.5L11.5 6.5L9.5 4.5L2.5 11.5Z" stroke="white" strokeWidth="1.3" strokeLinejoin="round" />
+                  <path d="M9.5 4.5L11.5 6.5" stroke="white" strokeWidth="1.3" strokeLinecap="round" />
+                </svg>
+              </div>
             </button>
             <input
               ref={fileInputRef}
@@ -76,52 +80,58 @@ function Profile() {
               accept="image/jpeg,image/png,image/webp"
               className={styles.fileInput}
               onChange={() => {
-                // Trigger save with new avatar
                 if (fileInputRef.current?.files?.[0]) {
                   handleSave(new Event('submit'));
                 }
               }}
             />
-            <span className={styles.uploadHint}>JPG, PNG under 5MB</span>
+            <div className={styles.avatarInfo}>
+              <span className={styles.avatarName}>{user?.name}</span>
+              <span className={styles.avatarEmail}>{user?.email}</span>
+              <span className={styles.avatarHint}>Click avatar to upload photo (JPG, PNG under 5MB)</span>
+            </div>
           </div>
+
+          <div className={styles.divider} />
+
+          <form className={styles.form} onSubmit={handleSave}>
+            <div className={styles.field}>
+              <label className={styles.label} htmlFor="profile-name">Display name</label>
+              <input
+                id="profile-name"
+                className={styles.input}
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Your name"
+                required
+                maxLength={50}
+              />
+            </div>
+
+            <div className={styles.field}>
+              <label className={styles.label} htmlFor="profile-email">Email address</label>
+              <input
+                id="profile-email"
+                className={`${styles.input} ${styles.inputReadonly}`}
+                type="email"
+                value={user?.email || ''}
+                readOnly
+              />
+              <span className={styles.fieldHint}>Email cannot be changed</span>
+            </div>
+
+            <div className={styles.formActions}>
+              <button
+                className={styles.saveBtn}
+                type="submit"
+                disabled={!hasChanges || isSaving}
+              >
+                {isSaving ? 'Saving...' : 'Save changes'}
+              </button>
+            </div>
+          </form>
         </div>
-
-        <div className={styles.divider} />
-
-        <form className={styles.form} onSubmit={handleSave}>
-          <div className={styles.field}>
-            <label className={styles.label} htmlFor="profile-name">Name</label>
-            <input
-              id="profile-name"
-              className={styles.input}
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Your name"
-              required
-              maxLength={50}
-            />
-          </div>
-
-          <div className={styles.field}>
-            <label className={styles.label} htmlFor="profile-email">Email</label>
-            <input
-              id="profile-email"
-              className={`${styles.input} ${styles.inputReadonly}`}
-              type="email"
-              value={user?.email || ''}
-              readOnly
-            />
-          </div>
-
-          <button
-            className={styles.saveBtn}
-            type="submit"
-            disabled={!hasChanges || isSaving}
-          >
-            {isSaving ? 'Saving...' : 'Save changes'}
-          </button>
-        </form>
       </div>
     </>
   );

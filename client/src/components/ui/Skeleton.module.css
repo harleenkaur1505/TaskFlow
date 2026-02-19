@@ -18,7 +18,7 @@
 
 .boardCard {
   aspect-ratio: 5 / 3;
-  border-radius: var(--border-radius-md);
+  border-radius: 12px;
   overflow: hidden;
 }
 
@@ -33,6 +33,6 @@
   width: 272px;
   flex-shrink: 0;
   background: var(--color-bg-tertiary);
-  border-radius: var(--border-radius-md);
+  border-radius: 12px;
   padding: 12px;
 }

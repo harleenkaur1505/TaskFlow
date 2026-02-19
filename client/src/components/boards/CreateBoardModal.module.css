@@ -1,7 +1,7 @@
 .backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
@@ -11,93 +11,95 @@
 
 .modal {
   position: relative;
-  width: 420px;
+  width: 440px;
   max-width: calc(100vw - 32px);
   background: var(--color-bg-elevated);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-xl);
+  border-radius: 16px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-border);
   overflow: hidden;
 }
 
 /* Live preview banner */
 .preview {
   position: relative;
-  height: 120px;
+  height: 140px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: var(--space-md);
-  transition: background-color var(--transition-fast);
+  padding: 16px 20px;
+  transition: background-color 200ms ease;
 }
 
 .previewLists {
   position: absolute;
-  bottom: 36px;
-  left: var(--space-md);
+  bottom: 44px;
+  left: 20px;
   display: flex;
   gap: 6px;
 }
 
 .previewList {
-  width: 56px;
-  height: 68px;
+  width: 52px;
+  height: 64px;
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 .previewTitle {
   position: relative;
-  color: white;
+  color: #FFFFFF;
   font-size: 18px;
   font-weight: 600;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  opacity: 0.85;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  opacity: 0.9;
 }
 
 /* Close button */
 .close {
   position: absolute;
-  top: var(--space-sm);
-  right: var(--space-sm);
-  width: 28px;
-  height: 28px;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
-  background: transparent;
-  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(4px);
+  border-radius: 8px;
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.8);
-  transition: background var(--transition-fast);
+  color: rgba(255, 255, 255, 0.85);
+  transition: background 150ms ease;
   z-index: 1;
 }
 
 .close svg {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
 }
 
 .close:hover {
-  background: rgba(0, 0, 0, 0.15);
-  color: white;
+  background: rgba(0, 0, 0, 0.3);
+  color: #FFFFFF;
 }
 
 /* Form */
 .form {
-  padding: var(--space-lg);
+  padding: 24px;
 }
 
 .field {
-  margin-bottom: var(--space-md);
+  margin-bottom: 18px;
 }
 
 .label {
   display: block;
-  font-size: var(--font-size-sm);
+  font-size: 13px;
   font-weight: 500;
   color: var(--color-text-secondary);
-  margin-bottom: var(--space-sm);
+  margin-bottom: 6px;
 }
 
 .required {
@@ -106,16 +108,16 @@
 
 .input {
   width: 100%;
-  height: 40px;
-  padding: 0 var(--space-sm);
+  height: 42px;
+  padding: 0 14px;
   border: 1.5px solid var(--color-border);
-  border-radius: var(--border-radius-sm);
-  font-size: var(--font-size-md);
+  border-radius: 10px;
+  font-size: 15px;
   font-family: var(--font-family);
   color: var(--color-text-primary);
   background: var(--color-bg-primary);
   outline: none;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: border-color 150ms ease, box-shadow 150ms ease;
   box-sizing: border-box;
 }
 
@@ -125,63 +127,63 @@
 }
 
 .input::placeholder {
-  color: var(--color-text-secondary);
-  opacity: 0.7;
+  color: var(--color-text-tertiary);
 }
 
 /* Color picker */
 .colorGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-sm);
+  gap: 8px;
 }
 
 .colorSwatch {
-  height: 32px;
-  border: none;
-  border-radius: var(--border-radius-sm);
+  height: 36px;
+  border: 2px solid transparent;
+  border-radius: 10px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 100ms ease, box-shadow var(--transition-fast);
+  transition: transform 120ms ease, box-shadow 150ms ease;
 }
 
 .colorSwatch:hover {
-  transform: scale(1.05);
-  filter: brightness(1.1);
+  transform: scale(1.06);
 }
 
 .colorSelected {
-  box-shadow: inset 0 0 0 2px white;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .checkIcon {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
 }
 
 /* Create button */
 .createBtn {
   width: 100%;
-  height: 42px;
-  margin-top: var(--space-sm);
+  height: 44px;
+  margin-top: 4px;
   border: none;
-  border-radius: var(--border-radius-md);
+  border-radius: 10px;
   background: var(--color-primary);
-  color: var(--color-text-inverse);
-  font-size: var(--font-size-md);
+  color: #FFFFFF;
+  font-size: 15px;
   font-weight: 600;
   font-family: var(--font-family);
   cursor: pointer;
-  transition: background var(--transition-fast);
+  transition: background 150ms ease, transform 150ms ease;
 }
 
 .createBtn:hover:not(:disabled) {
   background: var(--color-primary-hover);
+  transform: translateY(-1px);
 }
 
 .createBtn:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
 }
