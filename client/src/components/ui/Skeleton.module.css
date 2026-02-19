@@ -1,0 +1,38 @@
+.skeleton {
+  background: var(--color-bg-secondary);
+  animation: shimmer 1.5s infinite ease-in-out;
+}
+
+@keyframes shimmer {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+/* Boards dashboard skeleton */
+.boardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-md);
+}
+
+.boardCard {
+  aspect-ratio: 5 / 3;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+}
+
+/* Board view skeleton */
+.boardView {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+}
+
+.listSkeleton {
+  width: 272px;
+  flex-shrink: 0;
+  background: var(--color-bg-secondary);
+  border-radius: var(--border-radius-md);
+  padding: 12px;
+}

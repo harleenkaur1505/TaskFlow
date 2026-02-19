@@ -171,6 +171,10 @@ const updateProfile = async (req, res, next) => {
       updates.name = name;
     }
 
+    if (req.file) {
+      updates.avatar = `/uploads/${req.file.filename}`;
+    }
+
     const user = await User.findByIdAndUpdate(
       req.user.id,
       updates,

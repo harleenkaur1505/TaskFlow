@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
+import toast from 'react-hot-toast';
 import useAuth from '../../hooks/useAuth';
 import Navbar from '../../components/layout/Navbar';
 import BoardCard from '../../components/boards/BoardCard';
 import CreateBoardModal from '../../components/boards/CreateBoardModal';
-import Spinner from '../../components/ui/Spinner';
+import { BoardsSkeleton } from '../../components/ui/Skeleton';
 import {
   getBoards,
   createBoard,
@@ -24,7 +25,9 @@ function Boards() {
       const data = await getBoards();
       setBoards(data);
     } catch (err) {
-      setError(err.response?.data?.error?.message || 'Failed to load boards');
+      const msg = err.response?.data?.error?.message || 'Failed to load boards';
+      setError(msg);
+      toast.error(msg);
     } finally {
       setIsLoading(false);
     }
@@ -35,8 +38,13 @@ function Boards() {
   }, [fetchBoards]);
 
   const handleCreate = async ({ title, background }) => {
-    const newBoard = await createBoard({ title, background });
-    setBoards((prev) => [newBoard, ...prev]);
+    try {
+      const newBoard = await createBoard({ title, background });
+      setBoards((prev) => [newBoard, ...prev]);
+      toast.success('Board created');
+    } catch (err) {
+      toast.error(err.response?.data?.error?.message || 'Failed to create board');
+    }
   };
 
   const handleToggleStar = async (boardId) => {
@@ -69,7 +77,19 @@ function Boards() {
       <>
         <Navbar />
         <div className={styles.page}>
-          <Spinner />
+          <section className={styles.section}>
+            <h3 className={styles.sectionHeader}>
+              <svg className={styles.sectionIcon} viewBox="0 0 16 16"
+                fill="none" stroke="currentColor" strokeWidth="1.5">
+                <rect x="1" y="1" width="5.5" height="5.5" rx="1" />
+                <rect x="9.5" y="1" width="5.5" height="5.5" rx="1" />
+                <rect x="1" y="9.5" width="5.5" height="5.5" rx="1" />
+                <rect x="9.5" y="9.5" width="5.5" height="5.5" rx="1" />
+              </svg>
+              Your boards
+            </h3>
+            <BoardsSkeleton />
+          </section>
         </div>
       </>
     );

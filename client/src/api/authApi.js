@@ -27,3 +27,10 @@ export const getMe = async (token) => {
   const { data } = await api.get('/auth/me', config);
   return { user: data.data };
 };
+
+export const updateProfile = async (formData) => {
+  const { data } = await api.put('/auth/profile', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return data.data;
+};

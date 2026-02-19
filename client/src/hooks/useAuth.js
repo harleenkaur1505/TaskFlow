@@ -36,7 +36,7 @@ function useAuth() {
     dispatch({ type: 'LOGOUT' });
   }, [dispatch]);
 
-  return { user, accessToken, isLoading, isAuthenticated, login, register, logout };
+  return { user, accessToken, isLoading, isAuthenticated, login, register, logout, dispatch };
 }
 
 export default useAuth;

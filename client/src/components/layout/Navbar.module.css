@@ -46,7 +46,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  width: 200px;
+  width: 220px;
   height: 30px;
   padding: 0 var(--space-sm);
   background: rgba(255, 255, 255, 0.2);
@@ -56,6 +56,7 @@
   font-size: var(--font-size-sm);
   cursor: pointer;
   transition: background var(--transition-fast);
+  font-family: var(--font-family);
 }
 
 .searchTrigger:hover {
@@ -66,6 +67,36 @@
   width: 14px;
   height: 14px;
   flex-shrink: 0;
+}
+
+.shortcutBadge {
+  margin-left: auto;
+  font-size: 11px;
+  font-family: var(--font-family);
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-weight: 500;
+}
+
+/* Theme toggle */
+.themeToggle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.85);
+  transition: background var(--transition-fast);
+}
+
+.themeToggle:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 /* Right section */
@@ -158,6 +189,7 @@
   cursor: pointer;
   text-align: left;
   transition: background var(--transition-fast);
+  font-family: var(--font-family);
 }
 
 .dropdownItem:hover {
@@ -180,4 +212,15 @@
 
 [data-theme="dark"] .dropdownLogout:hover {
   background: rgba(235, 90, 70, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .center {
+    display: none;
+  }
+
+  .shortcutBadge {
+    display: none;
+  }
 }

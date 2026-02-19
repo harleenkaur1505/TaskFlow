@@ -42,11 +42,13 @@ const boardRoutes = require('./routes/boards');
 const listRoutes = require('./routes/lists');
 const cardRoutes = require('./routes/cards');
 const activityRoutes = require('./routes/activity');
+const searchRoutes = require('./routes/search');
 app.use('/api/auth', authRoutes);
 app.use('/api/boards', boardRoutes);
 app.use('/api/boards/:boardId/lists', listRoutes);
 app.use('/api/boards/:boardId/cards', cardRoutes);
 app.use('/api/boards/:boardId/activity', activityRoutes);
+app.use('/api/search', searchRoutes);
 
 // Global error handler (must be after routes)
 const errorHandler = require('./middleware/errorHandler');

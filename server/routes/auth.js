@@ -1,6 +1,7 @@
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const auth = require('../middleware/auth');
+const upload = require('../middleware/upload');
 const validate = require('../middleware/validate');
 const { registerValidation, loginValidation } = require('../utils/validators');
 const {
@@ -37,6 +38,6 @@ router.post('/refresh', refreshToken);
 // Protected routes
 router.post('/logout', auth, logout);
 router.get('/me', auth, getMe);
-router.put('/profile', auth, updateProfile);
+router.put('/profile', auth, upload.single('avatar'), updateProfile);
 
 module.exports = router;

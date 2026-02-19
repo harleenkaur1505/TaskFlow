@@ -10,7 +10,7 @@ import AddList from '../../components/board/AddList';
 import BoardHeader from '../../components/board/BoardHeader';
 import CardModal from '../../components/card/CardModal';
 import ActivitySidebar from '../../components/board/ActivitySidebar';
-import Spinner from '../../components/ui/Spinner';
+import { BoardSkeleton } from '../../components/ui/Skeleton';
 import styles from './Board.module.css';
 
 function BoardContent() {
@@ -94,8 +94,9 @@ function BoardContent() {
 
   if (isLoading) {
     return (
-      <div className={styles.loadingWrapper}>
-        <Spinner size={40} />
+      <div className={styles.page} style={{ backgroundColor: '#0079BF' }}>
+        <Navbar />
+        <BoardSkeleton />
       </div>
     );
   }

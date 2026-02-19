@@ -11,6 +11,15 @@ function ActivitySidebar({ boardId, onClose }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
+  // Escape to close
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [onClose]);
+
   const loadActivities = useCallback(async (pageNum, append = false) => {
     if (append) {
       setIsLoadingMore(true);

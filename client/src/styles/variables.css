@@ -52,8 +52,12 @@
 }
 
 [data-theme="dark"] {
+  color-scheme: dark;
+
   --color-primary: #579DFF;
   --color-primary-hover: #85B8FF;
+  --color-danger: #FD7168;
+  --color-success: #7EE2A8;
   --color-bg-primary: #1D2125;
   --color-bg-secondary: #282E33;
   --color-text-primary: #B6C2CF;
