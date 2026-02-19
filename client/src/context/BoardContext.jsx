@@ -114,6 +114,102 @@ function boardReducer(state, action) {
       };
     }
 
+    // --- Socket-driven actions (server state wins) ---
+
+    case 'SOCKET_REORDER_LISTS': {
+      // payload: [{ _id, position }]
+      const posMap = {};
+      for (const item of action.payload) {
+        posMap[item._id] = item.position;
+      }
+      const sorted = [...state.lists].sort(
+        (a, b) => (posMap[a._id] ?? a.position) - (posMap[b._id] ?? b.position),
+      );
+      return { ...state, lists: sorted };
+    }
+
+    case 'SOCKET_MOVE_CARD': {
+      const { cardId: moveCardId, sourceListId: srcId, destListId: dstId, newPosition: newPos } = action.payload;
+      let movedCard = null;
+
+      // Remove card from source list
+      const listsAfterRemove = state.lists.map((list) => {
+        if (list._id === srcId) {
+          const filtered = (list.cards || []).filter((c) => {
+            if (c._id === moveCardId) {
+              movedCard = c;
+              return false;
+            }
+            return true;
+          });
+          return { ...list, cards: filtered };
+        }
+        return list;
+      });
+
+      if (!movedCard) return state;
+
+      // Insert card into destination list at newPosition
+      const listsAfterInsert = listsAfterRemove.map((list) => {
+        if (list._id === dstId) {
+          const cards = [...(list.cards || [])];
+          cards.splice(newPos, 0, movedCard);
+          return { ...list, cards };
+        }
+        return list;
+      });
+
+      return { ...state, lists: listsAfterInsert };
+    }
+
+    case 'SOCKET_REORDER_CARDS': {
+      // payload: { listId, cards: [{ _id, position }] }
+      const { listId: reorderSocketListId, cards: posArr } = action.payload;
+      const cardPosMap = {};
+      for (const item of posArr) {
+        cardPosMap[item._id] = item.position;
+      }
+      return {
+        ...state,
+        lists: state.lists.map((list) => {
+          if (list._id !== reorderSocketListId) return list;
+          const sorted = [...(list.cards || [])].sort(
+            (a, b) => (cardPosMap[a._id] ?? a.position) - (cardPosMap[b._id] ?? b.position),
+          );
+          return { ...list, cards: sorted };
+        }),
+      };
+    }
+
+    case 'ADD_BOARD_MEMBER': {
+      if (!state.board) return state;
+      return {
+        ...state,
+        board: {
+          ...state.board,
+          members: [...(state.board.members || []), action.payload],
+        },
+      };
+    }
+
+    case 'REMOVE_BOARD_MEMBER': {
+      if (!state.board) return state;
+      return {
+        ...state,
+        board: {
+          ...state.board,
+          members: (state.board.members || []).filter(
+            (m) => (m._id || m) !== action.payload,
+          ),
+        },
+      };
+    }
+
+    case 'ADD_ACTIVITY':
+      // No-op in board reducer — activity sidebar fetches its own data.
+      // This case exists so the dispatch doesn't warn.
+      return state;
+
     default:
       return state;
   }

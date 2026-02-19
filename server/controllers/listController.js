@@ -3,6 +3,7 @@ const Card = require('../models/Card');
 const Board = require('../models/Board');
 const ApiError = require('../utils/ApiError');
 const { logActivity } = require('../services/activityService');
+const { emitToBoard } = require('../config/socket');
 
 const createList = async (req, res, next) => {
   try {
@@ -23,6 +24,11 @@ const createList = async (req, res, next) => {
 
     logActivity(req.user.id, boardId, null, 'list:created', {
       title: list.title,
+    });
+
+    // Emit with empty cards array so frontend can add it directly
+    emitToBoard(boardId, req.user.id, 'list:created', {
+      list: { ...list.toObject(), cards: [] },
     });
 
     res.status(201).json({ data: list });
@@ -56,6 +62,8 @@ const updateList = async (req, res, next) => {
         newTitle: list.title,
       });
     }
+
+    emitToBoard(boardId, req.user.id, 'list:updated', { list: list.toObject() });
 
     res.json({ data: list });
   } catch (error) {
@@ -97,6 +105,8 @@ const deleteList = async (req, res, next) => {
       title: listTitle,
     });
 
+    emitToBoard(boardId, req.user.id, 'list:deleted', { listId });
+
     res.json({ data: { message: 'List deleted' } });
   } catch (error) {
     next(error);
@@ -122,6 +132,10 @@ const reorderLists = async (req, res, next) => {
     await List.bulkWrite(bulkOps);
 
     logActivity(req.user.id, boardId, null, 'list:reordered', {});
+
+    emitToBoard(boardId, req.user.id, 'list:reordered', {
+      lists: lists.map(({ listId, position }) => ({ _id: listId, position })),
+    });
 
     res.json({ data: { message: 'Lists reordered' } });
   } catch (error) {

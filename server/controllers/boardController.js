@@ -5,6 +5,7 @@ const Activity = require('../models/Activity');
 const User = require('../models/User');
 const ApiError = require('../utils/ApiError');
 const { logActivity } = require('../services/activityService');
+const { emitToBoard } = require('../config/socket');
 
 const getBoards = async (req, res, next) => {
   try {
@@ -87,6 +88,8 @@ const updateBoard = async (req, res, next) => {
       .populate('owner', 'name email avatar')
       .populate('members', 'name email avatar');
 
+    emitToBoard(req.params.boardId, req.user.id, 'board:updated', { board });
+
     res.json({ data: board });
   } catch (error) {
     next(error);
@@ -151,6 +154,9 @@ const addMember = async (req, res, next) => {
       member: { id: user._id, name: user.name },
     });
 
+    const addedUser = { _id: user._id, name: user.name, email: user.email, avatar: user.avatar };
+    emitToBoard(board._id, req.user.id, 'member:added', { user: addedUser });
+
     res.json({ data: updated });
   } catch (error) {
     next(error);
@@ -191,6 +197,8 @@ const removeMember = async (req, res, next) => {
     logActivity(req.user.id, board._id, null, 'board:member_removed', {
       member: { id: userId, name: member?.name },
     });
+
+    emitToBoard(board._id, req.user.id, 'member:removed', { userId });
 
     res.json({ data: updated });
   } catch (error) {

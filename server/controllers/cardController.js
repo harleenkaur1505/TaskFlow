@@ -2,6 +2,7 @@ const Card = require('../models/Card');
 const List = require('../models/List');
 const Activity = require('../models/Activity');
 const ApiError = require('../utils/ApiError');
+const { emitToBoard } = require('../config/socket');
 
 const createCard = async (req, res, next) => {
   try {
@@ -45,6 +46,11 @@ const createCard = async (req, res, next) => {
       card: card._id,
       type: 'card:created',
       data: { title: card.title },
+    });
+
+    emitToBoard(boardId, req.user.id, 'card:created', {
+      card: card.toObject(),
+      listId,
     });
 
     res.status(201).json({ data: card });
@@ -159,6 +165,8 @@ const updateCard = async (req, res, next) => {
     const populated = await Card.findById(card._id)
       .populate('members', 'name email avatar');
 
+    emitToBoard(boardId, req.user.id, 'card:updated', { card: populated.toObject() });
+
     res.json({ data: populated });
   } catch (error) {
     next(error);
@@ -173,6 +181,8 @@ const deleteCard = async (req, res, next) => {
     if (!card) {
       throw new ApiError(404, 'Card not found', 'CARD_NOT_FOUND');
     }
+
+    const listId = card.list.toString();
 
     // Remove card from list's cards array
     await List.findByIdAndUpdate(card.list, {
@@ -207,6 +217,8 @@ const deleteCard = async (req, res, next) => {
     // Delete card and its activities
     await Activity.deleteMany({ card: card._id });
     await Card.findByIdAndDelete(cardId);
+
+    emitToBoard(boardId, req.user.id, 'card:deleted', { cardId, listId });
 
     res.json({ data: { message: 'Card deleted' } });
   } catch (error) {
@@ -285,6 +297,13 @@ const moveCard = async (req, res, next) => {
       },
     });
 
+    emitToBoard(boardId, req.user.id, 'card:moved', {
+      cardId,
+      sourceListId,
+      destListId: destinationListId,
+      newPosition,
+    });
+
     res.json({ data: { message: 'Card moved' } });
   } catch (error) {
     next(error);
@@ -294,6 +313,7 @@ const moveCard = async (req, res, next) => {
 const reorderCards = async (req, res, next) => {
   try {
     const { listId, cards } = req.body;
+    const { boardId } = req.params;
 
     if (!listId) {
       throw new ApiError(400, 'List ID is required', 'LIST_ID_REQUIRED');
@@ -318,6 +338,11 @@ const reorderCards = async (req, res, next) => {
       .map((c) => c.cardId);
 
     await List.findByIdAndUpdate(listId, { cards: orderedIds });
+
+    emitToBoard(boardId, req.user.id, 'card:reordered', {
+      listId,
+      cards: cards.map(({ cardId, position }) => ({ _id: cardId, position })),
+    });
 
     res.json({ data: { message: 'Cards reordered' } });
   } catch (error) {
@@ -372,6 +397,8 @@ const addMember = async (req, res, next) => {
       data: { member: { id: userId, name: member?.name } },
     });
 
+    emitToBoard(boardId, req.user.id, 'card:updated', { card: populated.toObject() });
+
     res.json({ data: populated });
   } catch (error) {
     next(error);
@@ -411,6 +438,8 @@ const removeMember = async (req, res, next) => {
       data: { member: { id: userId, name: member?.name } },
     });
 
+    emitToBoard(boardId, req.user.id, 'card:updated', { card: populated.toObject() });
+
     res.json({ data: populated });
   } catch (error) {
     next(error);
@@ -445,6 +474,8 @@ const addChecklist = async (req, res, next) => {
       data: { title: title.trim() },
     });
 
+    emitToBoard(boardId, req.user.id, 'card:updated', { card: populated.toObject() });
+
     res.json({ data: populated });
   } catch (error) {
     next(error);
@@ -453,7 +484,7 @@ const addChecklist = async (req, res, next) => {
 
 const updateChecklistItem = async (req, res, next) => {
   try {
-    const { cardId } = req.params;
+    const { cardId, boardId } = req.params;
     const { checklistId } = req.params;
     const { action, text, itemId } = req.body;
 
@@ -502,6 +533,8 @@ const updateChecklistItem = async (req, res, next) => {
     const populated = await Card.findById(card._id)
       .populate('members', 'name email avatar');
 
+    emitToBoard(boardId, req.user.id, 'card:updated', { card: populated.toObject() });
+
     res.json({ data: populated });
   } catch (error) {
     next(error);
@@ -537,6 +570,8 @@ const deleteChecklist = async (req, res, next) => {
       data: { title: checklistTitle },
     });
 
+    emitToBoard(boardId, req.user.id, 'card:updated', { card: populated.toObject() });
+
     res.json({ data: populated });
   } catch (error) {
     next(error);
@@ -567,6 +602,8 @@ const addComment = async (req, res, next) => {
 
     const populated = await Activity.findById(activity._id)
       .populate('user', 'name email avatar');
+
+    emitToBoard(boardId, req.user.id, 'activity:created', { activity: populated.toObject() });
 
     res.status(201).json({ data: populated });
   } catch (error) {
@@ -606,6 +643,8 @@ const addAttachment = async (req, res, next) => {
       type: 'card:attachment_added',
       data: { filename: req.file.originalname },
     });
+
+    emitToBoard(boardId, req.user.id, 'card:updated', { card: populated.toObject() });
 
     res.status(201).json({ data: populated });
   } catch (error) {
@@ -649,6 +688,8 @@ const deleteAttachment = async (req, res, next) => {
       type: 'card:attachment_removed',
       data: { filename },
     });
+
+    emitToBoard(boardId, req.user.id, 'card:updated', { card: populated.toObject() });
 
     res.json({ data: populated });
   } catch (error) {

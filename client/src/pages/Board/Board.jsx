@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import { BoardProvider } from '../../context/BoardContext';
 import useBoard from '../../hooks/useBoard';
+import useSocket from '../../hooks/useSocket';
 import Navbar from '../../components/layout/Navbar';
 import List from '../../components/board/List';
 import AddList from '../../components/board/AddList';
@@ -25,6 +26,9 @@ function BoardContent() {
     reorderCards,
     moveCard,
   } = useBoard();
+
+  // Join socket room for real-time updates
+  useSocket(boardId);
 
   useEffect(() => {
     fetchBoard(boardId).catch(() => {
