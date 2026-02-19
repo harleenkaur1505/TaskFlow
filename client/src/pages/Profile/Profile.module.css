@@ -1,5 +1,5 @@
 .page {
-  padding-top: 88px;
+  padding-top: 92px; /* 52px navbar + 40px top padding */
   padding-left: var(--space-lg);
   padding-right: var(--space-lg);
   padding-bottom: var(--space-2xl);
@@ -65,7 +65,7 @@
   height: 36px;
   padding: 0 var(--space-md);
   border: 1px solid var(--color-border);
-  border-radius: 6px;
+  border-radius: var(--border-radius-sm);
   background: var(--color-bg-primary);
   color: var(--color-text-primary);
   font-size: var(--font-size-sm);
@@ -131,11 +131,11 @@
 
 .input:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 2px rgba(0, 121, 191, 0.2);
+  box-shadow: 0 0 0 3px var(--color-primary-ring);
 }
 
 .inputReadonly {
-  background: var(--color-bg-secondary);
+  background: var(--color-bg-tertiary);
   color: var(--color-text-secondary);
   cursor: not-allowed;
 }

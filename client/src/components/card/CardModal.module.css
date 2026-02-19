@@ -15,9 +15,9 @@
   position: relative;
   width: 768px;
   max-width: 100%;
-  background: var(--color-bg-primary);
+  background: var(--color-bg-elevated);
   border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-xl);
   z-index: var(--z-modal);
   margin-bottom: auto;
   overflow: hidden;
@@ -44,8 +44,8 @@
   height: 32px;
   border-radius: 50%;
   border: none;
-  background: rgba(0, 0, 0, 0.08);
-  color: #42526E;
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-secondary);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -55,7 +55,7 @@
 }
 
 .closeBtn:hover {
-  background: rgba(0, 0, 0, 0.16);
+  background: var(--color-border);
 }
 
 .cover ~ .closeBtn {
@@ -97,7 +97,7 @@
 }
 
 .titleText:hover {
-  background: rgba(9, 30, 66, 0.04);
+  background: var(--color-bg-tertiary);
   border-radius: var(--border-radius-sm);
 }
 
@@ -187,7 +187,7 @@
   height: 32px;
   border-radius: 50%;
   border: none;
-  background: rgba(9, 30, 66, 0.06);
+  background: var(--color-bg-tertiary);
   font-size: 16px;
   color: var(--color-text-secondary);
   cursor: pointer;
@@ -198,7 +198,7 @@
 }
 
 .addChipBtn:hover {
-  background: rgba(9, 30, 66, 0.14);
+  background: var(--color-border);
 }
 
 .membersBar {
@@ -307,7 +307,7 @@
   gap: 8px;
   width: 100%;
   height: 32px;
-  background: rgba(9, 30, 66, 0.06);
+  background: var(--color-bg-tertiary);
   border: none;
   border-radius: var(--border-radius-sm);
   padding: 0 12px;
@@ -320,7 +320,7 @@
 }
 
 .sidebarBtn:hover {
-  background: rgba(9, 30, 66, 0.14);
+  background: var(--color-border);
 }
 
 .sidebarBtn svg {
@@ -344,9 +344,9 @@
   left: 0;
   top: 36px;
   width: 280px;
-  background: var(--color-bg-primary);
+  background: var(--color-bg-elevated);
   border-radius: var(--border-radius-md);
-  box-shadow: 0 8px 16px rgba(9, 30, 66, 0.25);
+  box-shadow: var(--shadow-lg);
   border: 1px solid var(--color-border);
   z-index: var(--z-dropdown);
   overflow: hidden;
@@ -377,7 +377,7 @@
 }
 
 .popoverClose:hover {
-  background: rgba(9, 30, 66, 0.06);
+  background: var(--color-bg-tertiary);
 }
 
 .popoverBody {
@@ -406,11 +406,12 @@
   background: var(--color-bg-primary);
   outline: none;
   margin-bottom: 8px;
-  transition: border-color var(--transition-fast);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .popoverInput:focus {
   border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-ring);
 }
 
 .popoverSaveBtn {
@@ -457,7 +458,7 @@
 .removeCoverBtn {
   grid-column: 1 / -1;
   margin-top: 4px;
-  background: rgba(9, 30, 66, 0.06);
+  background: var(--color-bg-tertiary);
   border: none;
   border-radius: var(--border-radius-sm);
   padding: 6px 12px;
@@ -467,12 +468,12 @@
 }
 
 .removeCoverBtn:hover {
-  background: rgba(9, 30, 66, 0.14);
+  background: var(--color-border);
 }
 
 /* Delete confirm */
 .deleteConfirm {
-  background: rgba(9, 30, 66, 0.06);
+  background: var(--color-bg-tertiary);
   border-radius: var(--border-radius-sm);
   padding: 12px;
 }
@@ -543,72 +544,4 @@
     left: auto;
     right: 0;
   }
-}
-
-/* Dark mode */
-[data-theme="dark"] .closeBtn {
-  background: rgba(255, 255, 255, 0.12);
-  color: var(--color-text-primary);
-}
-
-[data-theme="dark"] .closeBtn:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-[data-theme="dark"] .sidebarBtn {
-  background: rgba(255, 255, 255, 0.06);
-}
-
-[data-theme="dark"] .sidebarBtn:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="dark"] .addChipBtn {
-  background: rgba(255, 255, 255, 0.06);
-}
-
-[data-theme="dark"] .addChipBtn:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="dark"] .titleText:hover {
-  background: rgba(255, 255, 255, 0.04);
-}
-
-[data-theme="dark"] .titleInput {
-  background: var(--color-bg-secondary);
-}
-
-[data-theme="dark"] .checklistPopover,
-[data-theme="dark"] .coverPopover {
-  background: var(--color-bg-secondary);
-}
-
-[data-theme="dark"] .popoverInput {
-  background: var(--color-bg-primary);
-}
-
-[data-theme="dark"] .popoverClose:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-[data-theme="dark"] .deleteConfirm {
-  background: rgba(255, 255, 255, 0.06);
-}
-
-[data-theme="dark"] .removeCoverBtn {
-  background: rgba(255, 255, 255, 0.06);
-}
-
-[data-theme="dark"] .removeCoverBtn:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="dark"] .cover ~ .closeBtn {
-  background: rgba(0, 0, 0, 0.3);
-  color: white;
-}
-
-[data-theme="dark"] .cover ~ .closeBtn:hover {
-  background: rgba(0, 0, 0, 0.45);
 }

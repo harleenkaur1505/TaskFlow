@@ -23,7 +23,7 @@
 }
 
 .deleteBtn {
-  background: rgba(9, 30, 66, 0.06);
+  background: var(--color-bg-tertiary);
   border: none;
   border-radius: var(--border-radius-sm);
   padding: 4px 12px;
@@ -35,7 +35,7 @@
 }
 
 .deleteBtn:hover {
-  background: rgba(9, 30, 66, 0.14);
+  background: var(--color-border);
 }
 
 /* Progress */
@@ -58,7 +58,7 @@
 .progressBar {
   flex: 1;
   height: 8px;
-  background: rgba(9, 30, 66, 0.06);
+  background: var(--color-bg-tertiary);
   border-radius: 4px;
   overflow: hidden;
 }
@@ -91,7 +91,7 @@
 }
 
 .item:hover {
-  background: rgba(9, 30, 66, 0.06);
+  background: var(--color-bg-tertiary);
 }
 
 .itemDone .itemText {
@@ -224,24 +224,4 @@
 
 .cancelBtn:hover {
   color: var(--color-text-primary);
-}
-
-[data-theme="dark"] .item:hover {
-  background: rgba(255, 255, 255, 0.06);
-}
-
-[data-theme="dark"] .deleteBtn {
-  background: rgba(255, 255, 255, 0.06);
-}
-
-[data-theme="dark"] .deleteBtn:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="dark"] .addInput {
-  background: var(--color-bg-secondary);
-}
-
-[data-theme="dark"] .progressBar {
-  background: rgba(255, 255, 255, 0.08);
 }

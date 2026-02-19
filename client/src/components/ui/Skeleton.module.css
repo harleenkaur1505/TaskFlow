@@ -1,5 +1,5 @@
 .skeleton {
-  background: var(--color-bg-secondary);
+  background: var(--color-bg-tertiary);
   animation: shimmer 1.5s infinite ease-in-out;
 }
 
@@ -18,7 +18,7 @@
 
 .boardCard {
   aspect-ratio: 5 / 3;
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--border-radius-md);
   overflow: hidden;
 }
 
@@ -32,7 +32,7 @@
 .listSkeleton {
   width: 272px;
   flex-shrink: 0;
-  background: var(--color-bg-secondary);
+  background: var(--color-bg-tertiary);
   border-radius: var(--border-radius-md);
   padding: 12px;
 }

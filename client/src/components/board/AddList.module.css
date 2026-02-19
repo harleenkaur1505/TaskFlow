@@ -8,7 +8,7 @@
   padding: 0 14px;
   background: rgba(255, 255, 255, 0.24);
   border: none;
-  border-radius: 12px;
+  border-radius: var(--border-radius-lg);
   font-size: 14px;
   font-weight: 500;
   color: white;
@@ -25,14 +25,10 @@
 .form {
   width: 272px;
   min-width: 272px;
-  background: #F1F2F4;
-  border-radius: 12px;
+  background: var(--color-bg-tertiary);
+  border-radius: var(--border-radius-lg);
   padding: 8px;
   flex-shrink: 0;
-}
-
-[data-theme="dark"] .form {
-  background: var(--color-bg-secondary);
 }
 
 .input {
@@ -90,9 +86,5 @@
 }
 
 .closeButton:hover {
-  background: #D0D4DB;
-}
-
-[data-theme="dark"] .closeButton:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--color-border);
 }

@@ -12,9 +12,10 @@
 .modal {
   width: 560px;
   max-height: 480px;
-  background: var(--color-bg-primary);
+  background: var(--color-bg-elevated);
   border-radius: var(--border-radius-lg);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -65,14 +66,15 @@
 }
 
 .clearBtn:hover {
-  background: var(--color-bg-secondary);
+  background: var(--color-bg-tertiary);
   color: var(--color-text-primary);
 }
 
 .escBadge {
   font-size: 10px;
   color: var(--color-text-secondary);
-  background: var(--color-bg-secondary);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   padding: 2px 6px;
   flex-shrink: 0;
@@ -112,7 +114,7 @@
   width: 100%;
   height: 36px;
   padding: 0 12px;
-  border-radius: 6px;
+  border-radius: var(--border-radius-sm);
   gap: 10px;
   background: none;
   border: none;
@@ -124,7 +126,7 @@
 
 .resultItem:hover,
 .resultItemActive {
-  background: var(--color-bg-secondary);
+  background: var(--color-bg-tertiary);
 }
 
 .labelDot {
@@ -177,8 +179,8 @@
 
 .skeleton {
   height: 36px;
-  background: var(--color-bg-secondary);
-  border-radius: 6px;
+  background: var(--color-bg-tertiary);
+  border-radius: var(--border-radius-sm);
   animation: shimmer 1.5s infinite;
 }
 
@@ -210,7 +212,7 @@
 .key {
   font-size: 10px;
   font-family: var(--font-family);
-  background: var(--color-bg-secondary);
+  background: var(--color-bg-tertiary);
   border-radius: 3px;
   padding: 1px 4px;
   font-weight: 500;

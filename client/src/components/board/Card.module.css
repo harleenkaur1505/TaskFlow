@@ -1,24 +1,20 @@
 .card {
-  background: var(--color-bg-primary);
-  border-radius: 8px;
-  box-shadow: 0 1px 1px rgba(9, 30, 66, 0.25);
+  background: var(--color-bg-elevated);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
   cursor: pointer;
   overflow: hidden;
   transition: background var(--transition-fast);
 }
 
 .card:hover {
-  background: #F7F8F9;
-}
-
-[data-theme="dark"] .card:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--color-bg-tertiary);
 }
 
 /* Cover color strip */
 .cover {
   height: 32px;
-  border-radius: 8px 8px 0 0;
+  border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
 }
 
 /* Content */
@@ -119,7 +115,7 @@
   font-size: 11px;
   font-weight: 600;
   color: var(--color-text-inverse);
-  border: 2px solid var(--color-bg-primary);
+  border: 2px solid var(--color-bg-elevated);
   margin-left: -4px;
   overflow: hidden;
 }

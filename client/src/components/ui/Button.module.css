@@ -5,15 +5,14 @@
   gap: var(--space-sm);
   border: none;
   border-radius: var(--border-radius-md);
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color var(--transition-fast),
-    opacity var(--transition-fast);
+  transition: all var(--transition-fast);
   line-height: 1;
 }
 
 .button:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
@@ -25,10 +24,16 @@
 
 .primary:hover:not(:disabled) {
   background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--color-primary-ring);
+}
+
+.primary:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .secondary {
-  background-color: var(--color-bg-secondary);
+  background-color: var(--color-bg-tertiary);
   color: var(--color-text-primary);
 }
 
@@ -43,6 +48,7 @@
 
 .danger:hover:not(:disabled) {
   opacity: 0.9;
+  transform: translateY(-1px);
 }
 
 .ghost {
@@ -51,23 +57,25 @@
 }
 
 .ghost:hover:not(:disabled) {
-  background-color: var(--color-bg-secondary);
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
 }
 
 /* Sizes */
 .sm {
-  padding: var(--space-xs) var(--space-sm);
+  padding: 6px 12px;
   font-size: var(--font-size-sm);
 }
 
 .md {
-  padding: var(--space-sm) var(--space-md);
+  padding: 10px var(--space-md);
   font-size: var(--font-size-md);
 }
 
 .lg {
-  padding: 12px var(--space-lg);
-  font-size: var(--font-size-lg);
+  height: 46px;
+  padding: 0 var(--space-lg);
+  font-size: 15px;
 }
 
 /* Full width */

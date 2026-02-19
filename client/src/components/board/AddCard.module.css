@@ -7,7 +7,7 @@
   padding: 0 8px;
   border: none;
   background: transparent;
-  border-radius: 8px;
+  border-radius: var(--border-radius-sm);
   font-size: 14px;
   color: var(--color-text-secondary);
   cursor: pointer;
@@ -15,12 +15,8 @@
 }
 
 .trigger:hover {
-  background: #D0D4DB;
+  background: var(--color-bg-tertiary);
   color: var(--color-text-primary);
-}
-
-[data-theme="dark"] .trigger:hover {
-  background: rgba(255, 255, 255, 0.08);
 }
 
 /* Form state */
@@ -33,12 +29,12 @@
   min-height: 54px;
   padding: 6px 8px;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--border-radius-sm);
   font-size: 14px;
   font-family: inherit;
   color: var(--color-text-primary);
   background: var(--color-bg-primary);
-  box-shadow: 0 1px 1px rgba(9, 30, 66, 0.25);
+  box-shadow: var(--shadow-sm);
   outline: none;
   resize: none;
   line-height: 1.4;
@@ -87,9 +83,5 @@
 }
 
 .closeButton:hover {
-  background: #D0D4DB;
-}
-
-[data-theme="dark"] .closeButton:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--color-border);
 }

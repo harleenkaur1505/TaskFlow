@@ -1,17 +1,33 @@
 :root {
-  /* Colors */
-  --color-primary: #0079BF;
-  --color-primary-hover: #026AA7;
-  --color-danger: #EB5A46;
-  --color-success: #61BD4F;
-  --color-warning: #F2D600;
+  /* Primary palette — muted indigo-violet */
+  --color-primary: #6C63FF;
+  --color-primary-hover: #5B52E0;
+  --color-primary-light: rgba(108, 99, 255, 0.08);
+  --color-primary-ring: rgba(108, 99, 255, 0.15);
+
+  /* Semantic */
+  --color-danger: #EF4444;
+  --color-danger-light: #FEF2F2;
+  --color-success: #22C55E;
+  --color-success-light: #F0FDF4;
+  --color-warning: #F59E0B;
+  --color-warning-light: #FFFBEB;
+
+  /* Backgrounds */
   --color-bg-primary: #FFFFFF;
-  --color-bg-secondary: #F4F5F7;
-  --color-bg-board: #0079BF;
-  --color-text-primary: #172B4D;
-  --color-text-secondary: #5E6C84;
+  --color-bg-secondary: #F8FAFC;
+  --color-bg-tertiary: #F1F5F9;
+  --color-bg-elevated: #FFFFFF;
+
+  /* Text */
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #64748B;
+  --color-text-tertiary: #94A3B8;
   --color-text-inverse: #FFFFFF;
-  --color-border: #DFE1E6;
+
+  /* Borders */
+  --color-border: #E2E8F0;
+  --color-border-hover: #CBD5E1;
 
   /* Spacing */
   --space-xs: 4px;
@@ -22,7 +38,7 @@
   --space-2xl: 48px;
 
   /* Typography */
-  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-md: 1rem;
@@ -31,14 +47,16 @@
   --font-size-2xl: 1.5rem;
 
   /* Borders */
-  --border-radius-sm: 4px;
-  --border-radius-md: 8px;
-  --border-radius-lg: 12px;
+  --border-radius-sm: 6px;
+  --border-radius-md: 10px;
+  --border-radius-lg: 14px;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.15);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+  /* Shadows — subtle, layered */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 20px 48px rgba(0, 0, 0, 0.16);
 
   /* Transitions */
   --transition-fast: 150ms ease;
@@ -49,23 +67,53 @@
   --z-modal-backdrop: 200;
   --z-modal: 300;
   --z-toast: 400;
+
+  /* Navbar */
+  --navbar-bg: #FFFFFF;
+  --navbar-border: var(--color-border);
+  --navbar-text: var(--color-text-primary);
+  --navbar-text-secondary: var(--color-text-secondary);
+  --navbar-hover: var(--color-bg-tertiary);
 }
 
+/* ========== DARK THEME — deep, distinct ========== */
 [data-theme="dark"] {
   color-scheme: dark;
 
-  --color-primary: #579DFF;
-  --color-primary-hover: #85B8FF;
-  --color-danger: #FD7168;
-  --color-success: #7EE2A8;
-  --color-bg-primary: #1D2125;
-  --color-bg-secondary: #282E33;
-  --color-text-primary: #B6C2CF;
-  --color-text-secondary: #8C9BAB;
-  --color-text-inverse: #1D2125;
-  --color-border: #A6C5E229;
+  --color-primary: #8B83FF;
+  --color-primary-hover: #A09AFF;
+  --color-primary-light: rgba(139, 131, 255, 0.12);
+  --color-primary-ring: rgba(139, 131, 255, 0.25);
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --color-danger: #F87171;
+  --color-danger-light: rgba(248, 113, 113, 0.12);
+  --color-success: #4ADE80;
+  --color-success-light: rgba(74, 222, 128, 0.12);
+  --color-warning: #FBBF24;
+  --color-warning-light: rgba(251, 191, 36, 0.12);
+
+  --color-bg-primary: #0F1117;
+  --color-bg-secondary: #161822;
+  --color-bg-tertiary: #1E2030;
+  --color-bg-elevated: #1A1C2B;
+
+  --color-text-primary: #E2E8F0;
+  --color-text-secondary: #94A3B8;
+  --color-text-tertiary: #64748B;
+  --color-text-inverse: #0F172A;
+
+  --color-border: rgba(148, 163, 184, 0.12);
+  --color-border-hover: rgba(148, 163, 184, 0.2);
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 48px rgba(0, 0, 0, 0.6);
+
+  --navbar-bg: #0F1117;
+  --navbar-border: rgba(148, 163, 184, 0.08);
+  --navbar-text: #E2E8F0;
+  --navbar-text-secondary: #94A3B8;
+  --navbar-hover: rgba(148, 163, 184, 0.08);
 }

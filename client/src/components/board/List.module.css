@@ -1,14 +1,10 @@
 .list {
   width: 272px;
-  background: #F1F2F4;
+  background: var(--color-bg-secondary);
   border-radius: 12px;
   display: flex;
   flex-direction: column;
   max-height: calc(100vh - 140px);
-}
-
-[data-theme="dark"] .list {
-  background: var(--color-bg-secondary);
 }
 
 /* Header */
@@ -39,11 +35,7 @@
 }
 
 .title:hover {
-  background: #D0D4DB;
-}
-
-[data-theme="dark"] .title:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--color-bg-tertiary);
 }
 
 .titleInput {
@@ -80,11 +72,7 @@
 }
 
 .menuButton:hover {
-  background: #D0D4DB;
-}
-
-[data-theme="dark"] .menuButton:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--color-bg-tertiary);
 }
 
 .menu {

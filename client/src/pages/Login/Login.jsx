@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Mail, Lock } from 'lucide-react';
+import { Mail, Lock, CheckSquare } from 'lucide-react';
 import useAuth from '../../hooks/useAuth';
 import Button from '../../components/ui/Button';
 import Input from '../../components/ui/Input';
@@ -33,55 +33,65 @@ function Login() {
 
   return (
     <div className={styles.page}>
-      <div className={styles.card}>
-        <div className={styles.header}>
-          <h1 className={styles.brand}>TaskFlow</h1>
-          <p className={styles.subtitle}>Log in to your account</p>
+      <div className={styles.brandPanel}>
+        <div className={styles.brandLogo}>
+          <CheckSquare className={styles.brandIcon} strokeWidth={2.5} />
+          <span className={styles.brandName}>TaskFlow</span>
         </div>
+        <p className={styles.brandTagline}>Organize. Collaborate. Deliver.</p>
+      </div>
 
-        <form className={styles.form} onSubmit={handleSubmit}>
-          {error && <div className={styles.alert}>{error}</div>}
+      <div className={styles.formSide}>
+        <div className={styles.card}>
+          <div className={styles.header}>
+            <h1 className={styles.heading}>Welcome back</h1>
+            <p className={styles.subtitle}>Sign in to your workspace</p>
+          </div>
 
-          <Input
-            id="email"
-            label="Email address"
-            type="email"
-            icon={Mail}
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            autoComplete="email"
-          />
+          <form className={styles.form} onSubmit={handleSubmit}>
+            {error && <div className={styles.alert}>{error}</div>}
 
-          <Input
-            id="password"
-            label="Password"
-            type="password"
-            icon={Lock}
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            autoComplete="current-password"
-          />
+            <Input
+              id="email"
+              label="Email address"
+              type="email"
+              icon={Mail}
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              autoComplete="email"
+            />
 
-          <Button
-            type="submit"
-            fullWidth
-            size="lg"
-            isLoading={isSubmitting}
-          >
-            Log in
-          </Button>
-        </form>
+            <Input
+              id="password"
+              label="Password"
+              type="password"
+              icon={Lock}
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              autoComplete="current-password"
+            />
 
-        <p className={styles.footer}>
-          Don&apos;t have an account?{' '}
-          <Link to="/register" className={styles.link}>
-            Sign up
-          </Link>
-        </p>
+            <Button
+              type="submit"
+              fullWidth
+              size="lg"
+              isLoading={isSubmitting}
+            >
+              Sign in
+            </Button>
+          </form>
+
+          <p className={styles.footer}>
+            Don&apos;t have an account?{' '}
+            <Link to="/register" className={styles.link}>
+              Sign up
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

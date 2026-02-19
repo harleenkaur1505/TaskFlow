@@ -1,13 +1,13 @@
 .field {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  gap: 6px;
 }
 
 .label {
-  font-size: var(--font-size-sm);
+  font-size: 13px;
   font-weight: 500;
-  color: var(--color-text-primary);
+  color: var(--color-text-secondary);
 }
 
 .inputWrapper {
@@ -18,35 +18,38 @@
 
 .icon {
   position: absolute;
-  left: 12px;
-  color: var(--color-text-secondary);
+  left: 14px;
+  color: var(--color-text-tertiary);
   pointer-events: none;
 }
 
 .input {
   width: 100%;
-  padding: 10px 12px;
-  border: 1px solid var(--color-border);
+  height: 46px;
+  padding: 0 14px;
+  border: 1.5px solid var(--color-border);
   border-radius: var(--border-radius-md);
-  background-color: var(--color-bg-primary);
-  font-size: var(--font-size-md);
+  background-color: var(--color-bg-secondary);
+  font-size: 15px;
   color: var(--color-text-primary);
   transition: border-color var(--transition-fast),
-    box-shadow var(--transition-fast);
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
 }
 
 .input::placeholder {
-  color: var(--color-text-secondary);
+  color: var(--color-text-tertiary);
 }
 
 .input:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 2px rgba(0, 121, 191, 0.2);
+  box-shadow: 0 0 0 3px var(--color-primary-ring);
+  background-color: var(--color-bg-primary);
 }
 
 .hasIcon {
-  padding-left: 40px;
+  padding-left: 44px;
 }
 
 .hasError {
@@ -54,7 +57,7 @@
 }
 
 .hasError:focus {
-  box-shadow: 0 0 0 2px rgba(235, 90, 70, 0.2);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
 }
 
 .error {
